@@ -1,13 +1,33 @@
 package com.onlineBankingApplication.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 public class Recipient {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
 	private String email;
 	private String phone;
 	private String accountNumber;
 	private String description;
+
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
+
 	public Long getId() {
 		return id;
 	}
@@ -64,5 +84,9 @@ public class Recipient {
 		this.user = user;
 	}
 
-	
+	@Override
+	public String toString() {
+		return new ReflectionToStringBuilder(this, new MultilineRecursiveToStringStyle()).toString();
+	}
+
 }

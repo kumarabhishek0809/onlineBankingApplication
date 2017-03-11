@@ -3,9 +3,14 @@ package com.onlineBankingApplication.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+@Entity
 public class PrimaryTransaction {
 	private Long id;
 	private Date date;
@@ -14,6 +19,9 @@ public class PrimaryTransaction {
 	private String status;
 	private double amount;
 	private BigDecimal availableBalance;
+	
+	@ManyToOne
+	@JoinColumn(name = "primary_account_id")
 	private PrimaryAccount primaryAccount;
 
 	public PrimaryTransaction(Date date, String description, String type, String status, double amount,
