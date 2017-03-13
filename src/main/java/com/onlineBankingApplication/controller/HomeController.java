@@ -1,8 +1,7 @@
 package com.onlineBankingApplication.controller;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.onlineBankingApplication.domain.User;
+import com.onlineBankingApplication.security.config.UserSecurityService;
 import com.onlineBankingApplication.service.UserService;
 
 @Controller
 public class HomeController {
+	private static final Logger LOG = LoggerFactory.getLogger(UserSecurityService.class);
 
 	@Autowired
 	private UserService userService;
@@ -50,7 +51,7 @@ public class HomeController {
 //			Set<UserRoles> userRoles = new HashSet<>();
 //			userRoles.add(new UserRole(user, roleDao.findUserByName("USER")));
 //			userService.createUser(user, userRoles);
-			userService.save(user);
+			userService.create(user);
 			return "redirect:/";
 		}
 

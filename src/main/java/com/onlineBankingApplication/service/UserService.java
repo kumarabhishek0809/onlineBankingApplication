@@ -15,4 +15,6 @@ public interface UserService {
 	boolean checkEmailExists(String email);
 
 	void save(User user);
+
+	void create(User user);
 }

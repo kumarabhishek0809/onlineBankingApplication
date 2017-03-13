@@ -59,6 +59,14 @@ public class User implements UserDetails {
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<UserRole>();
 
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(Set<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
