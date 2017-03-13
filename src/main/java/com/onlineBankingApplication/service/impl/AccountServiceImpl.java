@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.service;
+package com.onlineBankingApplication.service.impl;
 
 import java.math.BigDecimal;
 
@@ -8,6 +8,7 @@ import com.onlineBankingApplication.dao.PrimaryAccountDao;
 import com.onlineBankingApplication.dao.SavingAccountDao;
 import com.onlineBankingApplication.domain.PrimaryAccount;
 import com.onlineBankingApplication.domain.SavingAccount;
+import com.onlineBankingApplication.service.AccountService;
 
 public class AccountServiceImpl implements AccountService {
 

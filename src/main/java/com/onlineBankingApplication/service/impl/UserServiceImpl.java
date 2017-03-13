@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.service;
+package com.onlineBankingApplication.service.impl;
 
 import java.util.Set;
 
@@ -15,6 +15,8 @@ import com.onlineBankingApplication.dao.UserDao;
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.domain.UserRole;
 import com.onlineBankingApplication.security.config.UserSecurityService;
+import com.onlineBankingApplication.service.AccountService;
+import com.onlineBankingApplication.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
