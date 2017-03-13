@@ -1,6 +1,9 @@
 package com.onlineBankingApplication.domain;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,11 +17,15 @@ import javax.persistence.OneToOne;
 
 import org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.onlineBankingApplication.domain.security.Authority;
+import com.onlineBankingApplication.domain.security.entity.UserRole;
 
 @Entity
-public class User {
+public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,7 +39,7 @@ public class User {
 	private String email;
 	private String phone;
 
-	private boolean enabled;
+	private boolean enabled = true;
 
 	@OneToOne
 	private PrimaryAccount primaryAccount;
@@ -47,6 +54,10 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Recipient> recipients;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Set<UserRole> userRoles = new HashSet<UserRole>();
 
 	public Long getUserId() {
 		return userId;
@@ -147,6 +158,37 @@ public class User {
 	@Override
 	public String toString() {
 		return new ReflectionToStringBuilder(this, new MultilineRecursiveToStringStyle()).toString();
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorities = new HashSet<>();
+		userRoles.forEach(userRole -> authorities.add(new Authority(userRole.getRole().getName())));
+		return authorities;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }
