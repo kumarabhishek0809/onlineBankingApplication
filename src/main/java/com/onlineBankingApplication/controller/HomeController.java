@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.onlineBankingApplication.domain.User;
-import com.onlineBankingApplication.security.config.UserSecurityService;
 import com.onlineBankingApplication.service.UserService;
 
 @Controller
 public class HomeController {
-	private static final Logger LOG = LoggerFactory.getLogger(UserSecurityService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
 	private UserService userService;

@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.domain.security.entity;
+package com.onlineBankingApplication.domain;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -22,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.onlineBankingApplication.domain.security.Authority;
-import com.onlineBankingApplication.domain.security.entity.UserRole;
 
 @Entity
 public class User implements UserDetails {
