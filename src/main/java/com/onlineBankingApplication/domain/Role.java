@@ -3,18 +3,30 @@ package com.onlineBankingApplication.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Role {
 
+	
+	/*
+	 * 
+	 * 
+	 * INSERT INTO `onlinebanking`.`role` (`role_id`, `name`) VALUES ('0', 'ROLE_USER');
+	 * INSERT INTO `onlinebanking`.`role` (`role_id`, `name`) VALUES ('1', 'ROLE_ADMIN');
+	 */
+	@Id
 	private int roleId;
 	private String name;
-	
+	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<UserRole> userRoles = new HashSet<UserRole>();
-	
-	public Role(){
-		
+
+	public Role() {
+
 	}
 
 	public int getRoleId() {
@@ -41,5 +53,4 @@ public class Role {
 		this.userRoles = userRoles;
 	}
 
-	
 }

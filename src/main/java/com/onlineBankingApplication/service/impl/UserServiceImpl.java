@@ -40,8 +40,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByUserName(String userName) {
-		return userDao.findByUserName(userName);
+	public User findByUserName(String username) {
+		return userDao.findByUserName(username);
 	}
 
 	@Override
@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean checkUserExists(String userName, String email) {
-		if (checkUserNameExists(userName) || checkEmailExists(email)) {
+	public boolean checkUserExists(String username, String email) {
+		if (checkUserNameExists(username) || checkEmailExists(email)) {
 			return true;
 		}
 		return false;
@@ -66,30 +66,28 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean checkUserNameExists(String userName) {
-		if (null != findByUserName(userName)) {
+	public boolean checkUserNameExists(String username) {
+		if (null != findByUserName(username)) {
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public void create(User user) {
-
-	}
-
 	@Transactional
 	public User createUser(User user,Set<UserRole> userRoles) {
-		User localUser = userDao.findByUserName(user.getUserName());
+		User localUser = userDao.findByUserName(user.getUsername());
 		if(localUser != null){
-			LOG.info("User with username {} already Exists",user.getUserName());
+			LOG.info("User with username {} already Exists",user.getUsername());
 		}else {
 			String encryptedPassword = passwordEncoder.encode(user.getPassword());
 			for(UserRole userRole :userRoles){
 				roleDao.save(userRole.getRole());
 				user.getUserRoles().addAll(userRoles);
+				user.setPassword(encryptedPassword);
 				user.setPrimaryAccount(accountService.createPrimaryAccount());
 				user.setSavingAccount(accountService.createSavingAccount());
+				user.setUserName(user.getUsername());
 				localUser = userDao.save(user);
 			}
 		}

@@ -13,6 +13,10 @@ import javax.persistence.Table;
 @Table(name = "user_role")
 public class UserRole {
 
+	
+	public UserRole(){
+		
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userRoleId;

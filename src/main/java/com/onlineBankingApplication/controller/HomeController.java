@@ -1,5 +1,9 @@
 package com.onlineBankingApplication.controller;
 
+import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.onlineBankingApplication.dao.RoleDao;
+import com.onlineBankingApplication.domain.PrimaryAccount;
+import com.onlineBankingApplication.domain.SavingAccount;
 import com.onlineBankingApplication.domain.User;
+import com.onlineBankingApplication.domain.UserRole;
 import com.onlineBankingApplication.service.UserService;
 
 @Controller
@@ -18,6 +26,9 @@ public class HomeController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private RoleDao roleDao;
 
 	@RequestMapping("/")
 	public String home() {
@@ -47,12 +58,24 @@ public class HomeController {
 			}
 			return "signUp";
 		} else {
-//			Set<UserRoles> userRoles = new HashSet<>();
-//			userRoles.add(new UserRole(user, roleDao.findUserByName("USER")));
-//			userService.createUser(user, userRoles);
-			userService.create(user);
+			Set<UserRole> userRoles = new HashSet<>();
+			userRoles.add(new UserRole(user, roleDao.findByName("ROLE_USER")));
+			userService.createUser(user, userRoles);
 			return "redirect:/";
 		}
+
+	}
+
+	@RequestMapping("/userFront")
+	public String userFront(Principal principal, Model model) {
+		User user = userService.findByUserName(principal.getName());
+		PrimaryAccount primaryAccount = user.getPrimaryAccount();
+		SavingAccount savingAccount = user.getSavingAccount();
+
+		model.addAttribute("primaryAccount", primaryAccount);
+		model.addAttribute("savingsAccount", savingAccount);
+
+		return "userFront";
 
 	}
 }
