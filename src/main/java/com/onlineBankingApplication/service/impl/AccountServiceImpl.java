@@ -21,7 +21,7 @@ import com.onlineBankingApplication.service.UserService;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-	private static final String SECONDARY = "Secondary";
+	private static final String SAVINGS = "Savings";
 
 	private static final String PRIMARY = "Primary";
 
@@ -73,7 +73,7 @@ public class AccountServiceImpl implements AccountService {
 					"Account", "Finished", parseDouble, primaryAccount.getAccountBalance(), primaryAccount);
 			transactionService.savePrimaryDepositTransaction(primaryTransaction);
 
-		} else if (SECONDARY.equalsIgnoreCase(accountType)) {
+		} else if (SAVINGS.equalsIgnoreCase(accountType)) {
 			SavingAccount savingAccount = user.getSavingAccount();
 			savingAccount.setAccountBalance(savingAccount.getAccountBalance().add(new BigDecimal(parseDouble)));
 			savingAccountDao.save(savingAccount);
@@ -97,7 +97,7 @@ public class AccountServiceImpl implements AccountService {
 					"Account", "Finished", parseDouble, primaryAccount.getAccountBalance(), primaryAccount);
 			transactionService.savePrimaryDepositTransaction(primaryTransaction);
 
-		} else if (SECONDARY.equalsIgnoreCase(accountType)) {
+		} else if (SAVINGS.equalsIgnoreCase(accountType)) {
 			SavingAccount savingAccount = user.getSavingAccount();
 			savingAccount.setAccountBalance(savingAccount.getAccountBalance().subtract(new BigDecimal(parseDouble)));
 			savingAccountDao.save(savingAccount);
