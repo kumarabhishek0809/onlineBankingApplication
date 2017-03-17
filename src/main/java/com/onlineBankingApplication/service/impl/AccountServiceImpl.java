@@ -27,12 +27,13 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private PrimaryAccountDao primaryAccountDao;
+	@Autowired
+	private SavingAccountDao savingAccountDao;
 
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private SavingAccountDao savingAccountDao;
+
 	
 	@Autowired
 	private TransactionService transactionService;
@@ -95,7 +96,7 @@ public class AccountServiceImpl implements AccountService {
 
 			PrimaryTransaction primaryTransaction = new PrimaryTransaction(new Date(), "Withdraw to Primary Account",
 					"Account", "Finished", parseDouble, primaryAccount.getAccountBalance(), primaryAccount);
-			transactionService.savePrimaryDepositTransaction(primaryTransaction);
+			transactionService.savePrimaryWithdrawTransaction(primaryTransaction);
 
 		} else if (SAVINGS.equalsIgnoreCase(accountType)) {
 			SavingAccount savingAccount = user.getSavingAccount();
@@ -104,7 +105,7 @@ public class AccountServiceImpl implements AccountService {
 
 			SavingTransaction savingTransaction = new SavingTransaction(new Date(), "Withdraw to savings Account",
 					"Account", "Finished", parseDouble, savingAccount.getAccountBalance(), savingAccount);
-			transactionService.saveSavingsDepositTransaction(savingTransaction);
+			transactionService.saveSavingsWithdrawTransaction(savingTransaction);
 
 		}
 		

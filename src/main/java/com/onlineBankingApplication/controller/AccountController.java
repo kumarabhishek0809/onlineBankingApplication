@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.service.AccountService;
+import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
 
 @Controller
@@ -22,11 +23,16 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private TransactionService transactionService;
+	
 
 	@RequestMapping("/primaryAccount")
 	public String primaryAccount(Model model,Principal principal) {
 		User user = userService.findByUserName(principal.getName());
 		model.addAttribute("primaryAccount",user.getPrimaryAccount());
+		model.addAttribute("primaryTransactionList",transactionService.findPrimaryTransactionList(principal.getName()));
 		return "primaryAccount";
 	}
 
@@ -34,6 +40,7 @@ public class AccountController {
 	public String savingsAccount(Model model,Principal principal) {
 		User user = userService.findByUserName(principal.getName());
 		model.addAttribute("savingsAccount",user.getSavingAccount());
+		model.addAttribute("savingsTransactionList",transactionService.findSavingsTransactionList(principal.getName()));
 		return "savingsAccount";
 	}
 	
@@ -55,7 +62,7 @@ public class AccountController {
 	public String withdraw(Model model){
 		model.addAttribute("accountType","");
 		model.addAttribute("amount","");
-		return "deposit";
+		return "withdraw";
 	}
 	
 	@RequestMapping(value = "/withdraw", method = RequestMethod.POST)

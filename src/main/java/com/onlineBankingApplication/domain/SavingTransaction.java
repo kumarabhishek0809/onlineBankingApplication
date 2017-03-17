@@ -28,6 +28,10 @@ public class SavingTransaction {
 	@JoinColumn(name = "saving_account_id")
 	private SavingAccount savingAccount;
 
+	public SavingTransaction() {
+
+	}
+
 	public SavingTransaction(Date date, String description, String type, String status, double amount,
 			BigDecimal availableBalance, SavingAccount savingAccount) {
 		super();

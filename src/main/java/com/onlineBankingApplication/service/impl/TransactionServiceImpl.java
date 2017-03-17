@@ -1,13 +1,20 @@
 package com.onlineBankingApplication.service.impl;
 
+import java.math.BigDecimal;
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.onlineBankingApplication.dao.PrimaryAccountDao;
 import com.onlineBankingApplication.dao.PrimaryTransactionDao;
+import com.onlineBankingApplication.dao.SavingAccountDao;
 import com.onlineBankingApplication.dao.SavingTransactionDao;
+import com.onlineBankingApplication.domain.PrimaryAccount;
 import com.onlineBankingApplication.domain.PrimaryTransaction;
+import com.onlineBankingApplication.domain.SavingAccount;
 import com.onlineBankingApplication.domain.SavingTransaction;
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.service.TransactionService;
@@ -25,12 +32,23 @@ public class TransactionServiceImpl implements TransactionService {
 	@Autowired
 	private SavingTransactionDao savingTransactionDao;
 
+	@Autowired
+	private PrimaryAccountDao primaryAccountDao;
+	@Autowired
+	private SavingAccountDao savingAccountDao;
+
+	private static final String SAVINGS = "Savings";
+
+	private static final String PRIMARY = "Primary";
+
+	@Override
 	public List<PrimaryTransaction> findPrimaryTransactionList(String username) {
 		User user = userService.findByUserName(username);
 		return user.getPrimaryAccount().getPrimaryTransactions();
 	}
 
-	public List<SavingTransaction> findSavingTransactionList(String username) {
+	@Override
+	public List<SavingTransaction> findSavingsTransactionList(String username) {
 		User user = userService.findByUserName(username);
 		return user.getSavingAccount().getSavingTransactions();
 	}
@@ -43,6 +61,45 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public void saveSavingsDepositTransaction(SavingTransaction savingTransaction) {
 		savingTransactionDao.save(savingTransaction);
+	}
+
+	@Override
+	public void savePrimaryWithdrawTransaction(PrimaryTransaction primaryTransaction) {
+		primaryTransactionDao.save(primaryTransaction);
+	}
+
+	@Override
+	public void saveSavingsWithdrawTransaction(SavingTransaction savingTransaction) {
+		savingTransactionDao.save(savingTransaction);
+	}
+
+	@Override
+	public void betweenAccountsTransafer(String transferFrom, String transferTo, String amount,
+			PrimaryAccount primaryAccount, SavingAccount savingAccount, Principal principal) {
+		User user = userService.findByUserName(principal.getName());
+		if (PRIMARY.equalsIgnoreCase(transferFrom) && SAVINGS.equalsIgnoreCase(transferTo)) {
+			primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
+			savingAccount.setAccountBalance(savingAccount.getAccountBalance().add(new BigDecimal(amount)));
+			primaryAccountDao.save(primaryAccount);
+			savingAccountDao.save(savingAccount);
+			
+			PrimaryTransaction primaryTransaction = new PrimaryTransaction(new Date(), "Transfer Between Primary To Saving",
+					"Account", "Finished", Double.parseDouble(amount), primaryAccount.getAccountBalance(), primaryAccount);
+			savePrimaryDepositTransaction(primaryTransaction);
+
+		} else if (SAVINGS.equalsIgnoreCase(transferFrom) && PRIMARY.equalsIgnoreCase(transferTo)) {
+			primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().add(new BigDecimal(amount)));
+			savingAccount.setAccountBalance(savingAccount.getAccountBalance().subtract(new BigDecimal(amount)));
+			primaryAccountDao.save(primaryAccount);
+			savingAccountDao.save(savingAccount);
+			
+
+			SavingTransaction savingTransaction = new SavingTransaction(new Date(), "Transfer Between Saving to Primary",
+					"Account", "Finished", Double.parseDouble(amount), savingAccount.getAccountBalance(), savingAccount);
+			saveSavingsDepositTransaction(savingTransaction);
+
+		}
+
 	}
 
 }
