@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class SavingAccount {
+public class SavingsAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

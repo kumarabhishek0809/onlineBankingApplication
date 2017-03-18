@@ -2,10 +2,10 @@ package com.onlineBankingApplication.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.onlineBankingApplication.domain.SavingAccount;
+import com.onlineBankingApplication.domain.SavingsAccount;
 
-public interface SavingAccountDao extends CrudRepository<SavingAccount, Long> {
+public interface SavingAccountDao extends CrudRepository<SavingsAccount, Long> {
 
-	SavingAccount findByAccountNumber(int accountNumber);
+	SavingsAccount findByAccountNumber(int accountNumber);
 
 }

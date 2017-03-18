@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.onlineBankingApplication.dao.RoleDao;
 import com.onlineBankingApplication.domain.PrimaryAccount;
-import com.onlineBankingApplication.domain.SavingAccount;
+import com.onlineBankingApplication.domain.SavingsAccount;
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.domain.UserRole;
 import com.onlineBankingApplication.service.UserService;
@@ -70,7 +70,7 @@ public class HomeController {
 	public String userFront(Principal principal, Model model) {
 		User user = userService.findByUserName(principal.getName());
 		PrimaryAccount primaryAccount = user.getPrimaryAccount();
-		SavingAccount savingAccount = user.getSavingAccount();
+		SavingsAccount savingAccount = user.getSavingsAccount();
 
 		model.addAttribute("primaryAccount", primaryAccount);
 		model.addAttribute("savingsAccount", savingAccount);

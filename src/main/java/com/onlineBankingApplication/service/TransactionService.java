@@ -6,7 +6,7 @@ import java.util.List;
 import com.onlineBankingApplication.domain.PrimaryAccount;
 import com.onlineBankingApplication.domain.PrimaryTransaction;
 import com.onlineBankingApplication.domain.Recipient;
-import com.onlineBankingApplication.domain.SavingAccount;
+import com.onlineBankingApplication.domain.SavingsAccount;
 import com.onlineBankingApplication.domain.SavingTransaction;
 
 public interface TransactionService {
@@ -22,7 +22,7 @@ public interface TransactionService {
 	List<SavingTransaction> findSavingsTransactionList(String name);
 
 	void betweenAccountsTransafer(String transferFrom, String transferTo, String amount, PrimaryAccount primaryAccount,
-			SavingAccount savingAccount,Principal principal);
+			SavingsAccount savingAccount,Principal principal);
 
 	List<Recipient> findRecipientList(Principal principal);
 
@@ -33,6 +33,6 @@ public interface TransactionService {
 	void deleteRecipientByName(String name);
 
 	void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount, PrimaryAccount primaryAccount,
-			SavingAccount savingAccount);
+			SavingsAccount savingAccount);
 
 }

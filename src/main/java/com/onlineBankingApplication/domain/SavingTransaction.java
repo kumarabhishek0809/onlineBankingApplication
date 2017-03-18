@@ -26,14 +26,14 @@ public class SavingTransaction {
 	private BigDecimal availableBalance;
 	@ManyToOne
 	@JoinColumn(name = "saving_account_id")
-	private SavingAccount savingAccount;
+	private SavingsAccount savingAccount;
 
 	public SavingTransaction() {
 
 	}
 
 	public SavingTransaction(Date date, String description, String type, String status, double amount,
-			BigDecimal availableBalance, SavingAccount savingAccount) {
+			BigDecimal availableBalance, SavingsAccount savingAccount) {
 		super();
 		this.date = date;
 		this.description = description;
@@ -92,11 +92,11 @@ public class SavingTransaction {
 		this.availableBalance = availableBalance;
 	}
 
-	public SavingAccount getSavingAccount() {
+	public SavingsAccount getSavingAccount() {
 		return savingAccount;
 	}
 
-	public void setSavingAccount(SavingAccount savingAccount) {
+	public void setSavingAccount(SavingsAccount savingAccount) {
 		this.savingAccount = savingAccount;
 	}
 

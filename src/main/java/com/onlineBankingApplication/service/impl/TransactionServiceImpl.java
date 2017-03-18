@@ -18,7 +18,7 @@ import com.onlineBankingApplication.dao.SavingTransactionDao;
 import com.onlineBankingApplication.domain.PrimaryAccount;
 import com.onlineBankingApplication.domain.PrimaryTransaction;
 import com.onlineBankingApplication.domain.Recipient;
-import com.onlineBankingApplication.domain.SavingAccount;
+import com.onlineBankingApplication.domain.SavingsAccount;
 import com.onlineBankingApplication.domain.SavingTransaction;
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.service.TransactionService;
@@ -56,7 +56,7 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public List<SavingTransaction> findSavingsTransactionList(String username) {
 		User user = userService.findByUserName(username);
-		return user.getSavingAccount().getSavingTransactions();
+		return user.getSavingsAccount().getSavingTransactions();
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public void betweenAccountsTransafer(String transferFrom, String transferTo, String amount,
-			PrimaryAccount primaryAccount, SavingAccount savingAccount, Principal principal) {
+			PrimaryAccount primaryAccount, SavingsAccount savingAccount, Principal principal) {
 		User user = userService.findByUserName(principal.getName());
 		if (PRIMARY.equalsIgnoreCase(transferFrom) && SAVINGS.equalsIgnoreCase(transferTo)) {
 			primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
@@ -136,7 +136,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount,
-			PrimaryAccount primaryAccount, SavingAccount savingAccount) {
+			PrimaryAccount primaryAccount, SavingsAccount savingAccount) {
 		if (PRIMARY.equalsIgnoreCase(accountType)) {
 			primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
 			primaryAccountDao.save(primaryAccount);

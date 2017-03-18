@@ -11,7 +11,7 @@ import com.onlineBankingApplication.dao.PrimaryAccountDao;
 import com.onlineBankingApplication.dao.SavingAccountDao;
 import com.onlineBankingApplication.domain.PrimaryAccount;
 import com.onlineBankingApplication.domain.PrimaryTransaction;
-import com.onlineBankingApplication.domain.SavingAccount;
+import com.onlineBankingApplication.domain.SavingsAccount;
 import com.onlineBankingApplication.domain.SavingTransaction;
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.service.AccountService;
@@ -54,8 +54,8 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public SavingAccount createSavingAccount() {
-		SavingAccount savingAccount = new SavingAccount();
+	public SavingsAccount createSavingAccount() {
+		SavingsAccount savingAccount = new SavingsAccount();
 		savingAccount.setAccountBalance(new BigDecimal(0.0));
 		savingAccount.setAccountNumber(accountGen());
 		savingAccountDao.save(savingAccount);
@@ -75,7 +75,7 @@ public class AccountServiceImpl implements AccountService {
 			transactionService.savePrimaryDepositTransaction(primaryTransaction);
 
 		} else if (SAVINGS.equalsIgnoreCase(accountType)) {
-			SavingAccount savingAccount = user.getSavingAccount();
+			SavingsAccount savingAccount = user.getSavingsAccount();
 			savingAccount.setAccountBalance(savingAccount.getAccountBalance().add(new BigDecimal(parseDouble)));
 			savingAccountDao.save(savingAccount);
 
@@ -99,7 +99,7 @@ public class AccountServiceImpl implements AccountService {
 			transactionService.savePrimaryWithdrawTransaction(primaryTransaction);
 
 		} else if (SAVINGS.equalsIgnoreCase(accountType)) {
-			SavingAccount savingAccount = user.getSavingAccount();
+			SavingsAccount savingAccount = user.getSavingsAccount();
 			savingAccount.setAccountBalance(savingAccount.getAccountBalance().subtract(new BigDecimal(parseDouble)));
 			savingAccountDao.save(savingAccount);
 

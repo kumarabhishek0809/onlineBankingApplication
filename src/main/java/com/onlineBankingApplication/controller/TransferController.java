@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.onlineBankingApplication.domain.PrimaryAccount;
 import com.onlineBankingApplication.domain.Recipient;
-import com.onlineBankingApplication.domain.SavingAccount;
+import com.onlineBankingApplication.domain.SavingsAccount;
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
@@ -43,7 +43,7 @@ public class TransferController {
 			Principal principal) throws Exception {
 		User user = userService.findByUserName(principal.getName());
 		PrimaryAccount primaryAccount = user.getPrimaryAccount();
-		SavingAccount savingAccount = user.getSavingAccount();
+		SavingsAccount savingAccount = user.getSavingsAccount();
 		transactionService.betweenAccountsTransafer(transferFrom, transferTo, amount, primaryAccount, savingAccount,principal);
 
 		return "redirect:/userFront";
@@ -107,7 +107,7 @@ public class TransferController {
 			@ModelAttribute("accountType") String accountType,@ModelAttribute("amount") String amount,Principal principal){
 		User user = userService.findByUserName(principal.getName());
 		Recipient recipient = transactionService.findRecipientByName(recipientName);
-		transactionService.toSomeoneElseTransfer(recipient,accountType,amount,user.getPrimaryAccount(),user.getSavingAccount());
+		transactionService.toSomeoneElseTransfer(recipient,accountType,amount,user.getPrimaryAccount(),user.getSavingsAccount());
 		
 		return "redirect:/userFront";
 		

@@ -49,7 +49,7 @@ public class User implements UserDetails {
 	private PrimaryAccount primaryAccount;
 
 	@OneToOne
-	private SavingAccount savingAccount;
+	private SavingsAccount savingsAccount;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -136,12 +136,12 @@ public class User implements UserDetails {
 		this.primaryAccount = primaryAccount;
 	}
 
-	public SavingAccount getSavingAccount() {
-		return savingAccount;
+	public SavingsAccount getSavingsAccount() {
+		return savingsAccount;
 	}
 
-	public void setSavingAccount(SavingAccount savingAccount) {
-		this.savingAccount = savingAccount;
+	public void setSavingAccount(SavingsAccount savingsAccount) {
+		this.savingsAccount = savingsAccount;
 	}
 
 	public List<Appointment> getAppointments() {

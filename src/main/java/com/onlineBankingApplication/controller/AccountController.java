@@ -39,7 +39,7 @@ public class AccountController {
 	@RequestMapping("/savingsAccount")
 	public String savingsAccount(Model model,Principal principal) {
 		User user = userService.findByUserName(principal.getName());
-		model.addAttribute("savingsAccount",user.getSavingAccount());
+		model.addAttribute("savingsAccount",user.getSavingsAccount());
 		model.addAttribute("savingsTransactionList",transactionService.findSavingsTransactionList(principal.getName()));
 		return "savingsAccount";
 	}
