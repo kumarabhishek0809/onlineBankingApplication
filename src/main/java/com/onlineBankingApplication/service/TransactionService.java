@@ -32,4 +32,7 @@ public interface TransactionService {
 
 	void deleteRecipientByName(String name);
 
+	void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount, PrimaryAccount primaryAccount,
+			SavingAccount savingAccount);
+
 }
