@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private _loginService: LoginService) {
     if (localStorage.getItem('PortalAdminHasLoggedIn') === ''
-      && localStorage.getItem('PortalAdminHasLoggedIn') == null) {
+      || localStorage.getItem('PortalAdminHasLoggedIn') == null) {
       this.loggedIn = false;
     } else {
       this.loggedIn = true;

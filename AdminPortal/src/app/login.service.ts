@@ -15,4 +15,9 @@ export class LoginService {
     });
     return this._http.post(url, params, { headers: headers, withCredentials: true });
   }
+
+  logout() {
+    let url = "http://localhost:8080/logout";
+    return this._http.get(url, { withCredentials: true });
+  }
 }
