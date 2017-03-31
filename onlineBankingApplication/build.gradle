@@ -33,6 +33,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile("org.springframework.boot:spring-boot-starter-security")
     compile('org.apache.commons:commons-lang3:3.5')
+	compile('commons-io:commons-io:2.5');
 	compile('mysql:mysql-connector-java:6.0.5')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

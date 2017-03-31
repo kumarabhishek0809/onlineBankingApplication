@@ -13,19 +13,20 @@ export class LoginComponent implements OnInit {
   loggedIn: Boolean = false;
   username: String;
   password: String;
-
   constructor(private _loginService: LoginService) {
     if (localStorage.getItem('PortalAdminHasLoggedIn') === ''
       || localStorage.getItem('PortalAdminHasLoggedIn') == null) {
       console.log(localStorage);
       this.loggedIn = false;
     } else {
-      console.log(localStorage);
+      console.log('Else Block Loged True' + localStorage);
       this.loggedIn = true;
     }
   }
 
   onSubmit() {
+    console.log('user' + this.username);
+    console.log('password' + this.password);
     this._loginService.sendCredential(this.username, this.password).subscribe(
       res => {
         this.loggedIn = true;
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem('PortalAdminHasLoggedIn', '');
   }
 
 }

@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -36,7 +37,7 @@ public class RequestFilter implements Filter {
 		httpResponse.setHeader("Access-Control-Allow-Headers","x-requested-with");
 		httpResponse.setHeader("Access-Control-Max-Age","3600");
 		httpResponse.setHeader("Access-Control-Allow-Credentials","true");
-		
+		System.out.println(IOUtils.toString(httpRequest.getReader()));
 		if(!(httpRequest.getMethod().equalsIgnoreCase("OPTIONS"))){
 			try{
 				chain.doFilter(httpRequest, httpResponse);

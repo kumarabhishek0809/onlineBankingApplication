@@ -10,12 +10,12 @@ import { UserService } from '../user.service';
 export class UserAccountComponent implements OnInit {
 
   userList: Object[];
-
   constructor(private _userService: UserService, private _router: Router) {
     this.getUsers();
   }
 
   getUsers() {
+    console.log('Inside User Service');
     this._userService.getUsers().subscribe(
       res => { this.userList = JSON.parse(JSON.parse(JSON.stringify(res))._body); },
       error => console.log(error)

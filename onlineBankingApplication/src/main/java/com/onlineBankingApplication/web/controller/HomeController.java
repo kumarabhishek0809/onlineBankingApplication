@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.controller;
+package com.onlineBankingApplication.web.controller;
 
 import java.security.Principal;
 import java.util.HashSet;

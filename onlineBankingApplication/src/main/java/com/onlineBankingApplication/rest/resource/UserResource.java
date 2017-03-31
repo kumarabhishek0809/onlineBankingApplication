@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.resource;
+package com.onlineBankingApplication.rest.resource;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class UserResource {
 		userService.enableUser(userName);
 	}
 	
-	@RequestMapping(value = "/user/{userName}/enable")
+	@RequestMapping(value = "/user/{userName}/disable")
 	public void disableUser(@PathVariable("userName") String userName){
 		userService.disableUser(userName);
 	}
