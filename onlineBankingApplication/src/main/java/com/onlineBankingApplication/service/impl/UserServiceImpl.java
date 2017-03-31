@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findByUserName(String username) {
-		return userDao.findByUserName(username);
+		return userDao.findByUsername(username);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public User createUser(User user, Set<UserRole> userRoles) {
-		User localUser = userDao.findByUserName(user.getUsername());
+		User localUser = userDao.findByUsername(user.getUsername());
 		if (localUser != null) {
 			LOG.info("User with username {} already Exists", user.getUsername());
 		} else {
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 				user.setPassword(encryptedPassword);
 				user.setPrimaryAccount(accountService.createPrimaryAccount());
 				user.setSavingAccount(accountService.createSavingAccount());
-				user.setUserName(user.getUsername());
+				user.setUsername(user.getUsername());
 				localUser = userDao.save(user);
 			}
 		}
@@ -105,16 +105,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void enableUser(String userName) {
-		User user = findByUserName(userName);
+	public void enableUser(String username) {
+		User user = findByUserName(username);
 		user.setEnabled(true);
 		userDao.save(user);
 
 	}
 
 	@Override
-	public void disableUser(String userName) {
-		User user = findByUserName(userName);
+	public void disableUser(String username) {
+		User user = findByUserName(username);
 		user.setEnabled(false);
 		userDao.save(user);
 

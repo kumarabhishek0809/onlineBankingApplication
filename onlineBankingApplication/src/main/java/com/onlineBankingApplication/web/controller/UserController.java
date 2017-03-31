@@ -28,7 +28,7 @@ public class UserController {
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public String profilePost(@ModelAttribute("user") User userLocal, Model model) {
 		User user = userService.findByUserName(userLocal.getUsername());
-		user.setUserName(userLocal.getUserName());
+		user.setUsername(userLocal.getUsername());
 		user.setFirstName(userLocal.getFirstName());
 		user.setLastName(userLocal.getLastName());
 		user.setEmail(userLocal.getEmail());

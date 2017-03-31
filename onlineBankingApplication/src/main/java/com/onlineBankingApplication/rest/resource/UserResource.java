@@ -30,24 +30,24 @@ public class UserResource {
 		return userService.findUserList();
 	}
 	
-	@RequestMapping(value = "/user/{userName}/enable")
-	public void enableUser(@PathVariable("userName") String userName){
-		userService.enableUser(userName);
+	@RequestMapping(value = "/user/{username}/enable")
+	public void enableUser(@PathVariable("username") String username){
+		userService.enableUser(username);
 	}
 	
-	@RequestMapping(value = "/user/{userName}/disable")
-	public void disableUser(@PathVariable("userName") String userName){
-		userService.disableUser(userName);
+	@RequestMapping(value = "/user/{username}/disable")
+	public void disableUser(@PathVariable("username") String username){
+		userService.disableUser(username);
 	}
 	
 	@RequestMapping(value="/user/primary/transaction",method = RequestMethod.GET)
-	public List<PrimaryTransaction> getPrimaryTransactionList(@RequestParam("userName") String userName){
-		return transactionService.findPrimaryTransactionList(userName);
+	public List<PrimaryTransaction> getPrimaryTransactionList(@RequestParam("username") String username){
+		return transactionService.findPrimaryTransactionList(username);
 	}
 	
 	@RequestMapping(value="/user/saving/transaction",method = RequestMethod.GET)
-	public List<SavingsTransaction> getSavingsTransactionList(@RequestParam("userName") String userName){
-		return transactionService.findSavingsTransactionList(userName);
+	public List<SavingsTransaction> getSavingsTransactionList(@RequestParam("username") String username){
+		return transactionService.findSavingsTransactionList(username);
 	}
 	
 }

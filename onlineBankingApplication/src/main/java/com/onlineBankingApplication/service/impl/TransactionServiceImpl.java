@@ -111,9 +111,9 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public List<Recipient> findRecipientList(Principal principal) {
-		String userName = principal.getName();
+		String username = principal.getName();
 		List<Recipient> recipients = StreamSupport.stream(recipientDao.findAll().spliterator(), true)
-				.filter(recipient -> userName.equalsIgnoreCase(recipient.getUser().getUserName()))
+				.filter(recipient -> username.equalsIgnoreCase(recipient.getUser().getUsername()))
 				.collect(Collectors.toList());
 		return recipients;
 	}
