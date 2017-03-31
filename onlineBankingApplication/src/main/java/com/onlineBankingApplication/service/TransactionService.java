@@ -7,19 +7,19 @@ import com.onlineBankingApplication.domain.PrimaryAccount;
 import com.onlineBankingApplication.domain.PrimaryTransaction;
 import com.onlineBankingApplication.domain.Recipient;
 import com.onlineBankingApplication.domain.SavingsAccount;
-import com.onlineBankingApplication.domain.SavingTransaction;
+import com.onlineBankingApplication.domain.SavingsTransaction;
 
 public interface TransactionService {
 
 	void savePrimaryDepositTransaction(PrimaryTransaction primaryTransaction);
 
-	void saveSavingsDepositTransaction(SavingTransaction savingTransaction);
+	void saveSavingsDepositTransaction(SavingsTransaction savingTransaction);
 	void savePrimaryWithdrawTransaction(PrimaryTransaction primaryTransaction);
-	void saveSavingsWithdrawTransaction(SavingTransaction savingTransaction);
+	void saveSavingsWithdrawTransaction(SavingsTransaction savingTransaction);
 
 	List<PrimaryTransaction> findPrimaryTransactionList(String name);
 
-	List<SavingTransaction> findSavingsTransactionList(String name);
+	List<SavingsTransaction> findSavingsTransactionList(String name);
 
 	void betweenAccountsTransafer(String transferFrom, String transferTo, String amount, PrimaryAccount primaryAccount,
 			SavingsAccount savingAccount,Principal principal);

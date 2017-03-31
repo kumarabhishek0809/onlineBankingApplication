@@ -14,7 +14,7 @@ import org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 @Entity
-public class SavingTransaction {
+public class SavingsTransaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -28,11 +28,11 @@ public class SavingTransaction {
 	@JoinColumn(name = "saving_account_id")
 	private SavingsAccount savingAccount;
 
-	public SavingTransaction() {
+	public SavingsTransaction() {
 
 	}
 
-	public SavingTransaction(Date date, String description, String type, String status, double amount,
+	public SavingsTransaction(Date date, String description, String type, String status, double amount,
 			BigDecimal availableBalance, SavingsAccount savingAccount) {
 		super();
 		this.date = date;

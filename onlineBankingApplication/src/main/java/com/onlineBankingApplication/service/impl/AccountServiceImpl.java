@@ -12,7 +12,7 @@ import com.onlineBankingApplication.dao.SavingAccountDao;
 import com.onlineBankingApplication.domain.PrimaryAccount;
 import com.onlineBankingApplication.domain.PrimaryTransaction;
 import com.onlineBankingApplication.domain.SavingsAccount;
-import com.onlineBankingApplication.domain.SavingTransaction;
+import com.onlineBankingApplication.domain.SavingsTransaction;
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.service.AccountService;
 import com.onlineBankingApplication.service.TransactionService;
@@ -79,7 +79,7 @@ public class AccountServiceImpl implements AccountService {
 			savingAccount.setAccountBalance(savingAccount.getAccountBalance().add(new BigDecimal(parseDouble)));
 			savingAccountDao.save(savingAccount);
 
-			SavingTransaction savingTransaction = new SavingTransaction(new Date(), "Deposit to savings Account",
+			SavingsTransaction savingTransaction = new SavingsTransaction(new Date(), "Deposit to savings Account",
 					"Account", "Finished", parseDouble, savingAccount.getAccountBalance(), savingAccount);
 			transactionService.saveSavingsDepositTransaction(savingTransaction);
 
@@ -103,7 +103,7 @@ public class AccountServiceImpl implements AccountService {
 			savingAccount.setAccountBalance(savingAccount.getAccountBalance().subtract(new BigDecimal(parseDouble)));
 			savingAccountDao.save(savingAccount);
 
-			SavingTransaction savingTransaction = new SavingTransaction(new Date(), "Withdraw to savings Account",
+			SavingsTransaction savingTransaction = new SavingsTransaction(new Date(), "Withdraw to savings Account",
 					"Account", "Finished", parseDouble, savingAccount.getAccountBalance(), savingAccount);
 			transactionService.saveSavingsWithdrawTransaction(savingTransaction);
 

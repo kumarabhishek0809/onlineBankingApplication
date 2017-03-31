@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.onlineBankingApplication.domain.SavingTransaction;
+import com.onlineBankingApplication.domain.SavingsTransaction;
 
-public interface SavingTransactionDao extends CrudRepository<SavingTransaction, Long> {
-	List<SavingTransaction> findAll();
+public interface SavingTransactionDao extends CrudRepository<SavingsTransaction, Long> {
+	List<SavingsTransaction> findAll();
 }

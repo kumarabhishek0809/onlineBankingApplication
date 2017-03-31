@@ -10,15 +10,17 @@ import { Observable } from 'rxjs/Observable';
 })
 export class LoginComponent implements OnInit {
 
-  loggedIn: Boolean;
+  loggedIn: Boolean = false;
   username: String;
   password: String;
 
   constructor(private _loginService: LoginService) {
     if (localStorage.getItem('PortalAdminHasLoggedIn') === ''
       || localStorage.getItem('PortalAdminHasLoggedIn') == null) {
+      console.log(localStorage);
       this.loggedIn = false;
     } else {
+      console.log(localStorage);
       this.loggedIn = true;
     }
   }

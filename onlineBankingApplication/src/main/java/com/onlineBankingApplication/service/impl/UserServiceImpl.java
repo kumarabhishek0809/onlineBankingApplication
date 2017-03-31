@@ -1,6 +1,9 @@
 package com.onlineBankingApplication.service.impl;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.transaction.Transactional;
 
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.onlineBankingApplication.dao.RoleDao;
 import com.onlineBankingApplication.dao.UserDao;
+import com.onlineBankingApplication.domain.Recipient;
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.domain.UserRole;
 import com.onlineBankingApplication.security.config.UserSecurityService;
@@ -24,16 +28,16 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private RoleDao roleDao;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
 	private AccountService accountService;
-	
+
 	@Override
 	public void save(User user) {
 		userDao.save(user);
@@ -75,13 +79,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User createUser(User user,Set<UserRole> userRoles) {
+	public User createUser(User user, Set<UserRole> userRoles) {
 		User localUser = userDao.findByUserName(user.getUsername());
-		if(localUser != null){
-			LOG.info("User with username {} already Exists",user.getUsername());
-		}else {
+		if (localUser != null) {
+			LOG.info("User with username {} already Exists", user.getUsername());
+		} else {
 			String encryptedPassword = passwordEncoder.encode(user.getPassword());
-			for(UserRole userRole :userRoles){
+			for (UserRole userRole : userRoles) {
 				roleDao.save(userRole.getRole());
 				user.getUserRoles().addAll(userRoles);
 				user.setPassword(encryptedPassword);
@@ -92,6 +96,28 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		return localUser;
+	}
+
+	@Override
+	public List<User> findUserList() {
+		return StreamSupport.stream(userDao.findAll().spliterator(), true).collect(Collectors.toList());
+
+	}
+
+	@Override
+	public void enableUser(String userName) {
+		User user = findByUserName(userName);
+		user.setEnabled(true);
+		userDao.save(user);
+
+	}
+
+	@Override
+	public void disableUser(String userName) {
+		User user = findByUserName(userName);
+		user.setEnabled(false);
+		userDao.save(user);
+
 	}
 
 }

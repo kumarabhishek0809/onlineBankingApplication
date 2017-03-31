@@ -41,7 +41,7 @@ public class RequestFilter implements Filter {
 			try{
 				chain.doFilter(httpRequest, httpResponse);
 			}catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}else{
 			System.out.println("Pre-flight");
@@ -51,7 +51,6 @@ public class RequestFilter implements Filter {
 					+ "accept,origin,authorization,x-requested-with");
 			httpResponse.setHeader("Access-Control-Max-Age","3600");
 			httpResponse.setStatus(HttpServletResponse.SC_OK);
-			httpResponse.setHeader("Access-Control-Allow-Credentials","true");
 		}
 		
 		

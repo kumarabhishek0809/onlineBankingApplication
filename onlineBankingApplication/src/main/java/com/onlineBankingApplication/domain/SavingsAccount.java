@@ -26,7 +26,7 @@ public class SavingsAccount {
 
 	@OneToMany(mappedBy = "savingAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
-	private List<SavingTransaction> savingTransactions;
+	private List<SavingsTransaction> savingTransactions;
 
 	public Long getId() {
 		return id;
@@ -52,11 +52,11 @@ public class SavingsAccount {
 		this.accountBalance = accountBalance;
 	}
 
-	public List<SavingTransaction> getSavingTransactions() {
+	public List<SavingsTransaction> getSavingTransactions() {
 		return savingTransactions;
 	}
 
-	public void setSavingTransactions(List<SavingTransaction> savingTransactions) {
+	public void setSavingTransactions(List<SavingsTransaction> savingTransactions) {
 		this.savingTransactions = savingTransactions;
 	}
 

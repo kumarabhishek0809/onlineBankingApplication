@@ -19,7 +19,7 @@ import com.onlineBankingApplication.domain.PrimaryAccount;
 import com.onlineBankingApplication.domain.PrimaryTransaction;
 import com.onlineBankingApplication.domain.Recipient;
 import com.onlineBankingApplication.domain.SavingsAccount;
-import com.onlineBankingApplication.domain.SavingTransaction;
+import com.onlineBankingApplication.domain.SavingsTransaction;
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
@@ -54,7 +54,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public List<SavingTransaction> findSavingsTransactionList(String username) {
+	public List<SavingsTransaction> findSavingsTransactionList(String username) {
 		User user = userService.findByUserName(username);
 		return user.getSavingsAccount().getSavingTransactions();
 	}
@@ -65,7 +65,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public void saveSavingsDepositTransaction(SavingTransaction savingTransaction) {
+	public void saveSavingsDepositTransaction(SavingsTransaction savingTransaction) {
 		savingTransactionDao.save(savingTransaction);
 	}
 
@@ -75,7 +75,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public void saveSavingsWithdrawTransaction(SavingTransaction savingTransaction) {
+	public void saveSavingsWithdrawTransaction(SavingsTransaction savingTransaction) {
 		savingTransactionDao.save(savingTransaction);
 	}
 
@@ -100,7 +100,7 @@ public class TransactionServiceImpl implements TransactionService {
 			primaryAccountDao.save(primaryAccount);
 			savingAccountDao.save(savingAccount);
 
-			SavingTransaction savingTransaction = new SavingTransaction(new Date(),
+			SavingsTransaction savingTransaction = new SavingsTransaction(new Date(),
 					"Transfer Between Saving to Primary", "Account", "Finished", Double.parseDouble(amount),
 					savingAccount.getAccountBalance(), savingAccount);
 			saveSavingsDepositTransaction(savingTransaction);
@@ -149,7 +149,7 @@ public class TransactionServiceImpl implements TransactionService {
 			savingAccount.setAccountBalance(savingAccount.getAccountBalance().subtract(new BigDecimal(amount)));
 			savingAccountDao.save(savingAccount);
 
-			SavingTransaction savingTransaction = new SavingTransaction(new Date(),
+			SavingsTransaction savingTransaction = new SavingsTransaction(new Date(),
 					"Transfer To Recipient " + recipient.getName(), "Transfer", "Finished", Double.parseDouble(amount),
 					savingAccount.getAccountBalance(), savingAccount);
 			saveSavingsDepositTransaction(savingTransaction);

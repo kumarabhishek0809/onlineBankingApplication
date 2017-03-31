@@ -1,5 +1,6 @@
 package com.onlineBankingApplication.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.onlineBankingApplication.domain.User;
@@ -20,4 +21,10 @@ public interface UserService {
 	void save(User user);
 
 	User createUser(User user, Set<UserRole> userRoles);
+
+	List<User> findUserList();
+
+	void enableUser(String userName);
+
+	void disableUser(String userName);
 }
