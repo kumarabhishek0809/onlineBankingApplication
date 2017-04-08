@@ -109,7 +109,6 @@ public class UserServiceImpl implements UserService {
 		User user = findByUserName(username);
 		user.setEnabled(true);
 		userDao.save(user);
-
 	}
 
 	@Override

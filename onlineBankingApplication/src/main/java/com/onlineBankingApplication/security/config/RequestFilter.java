@@ -16,8 +16,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
+//@Component
+//@Order(Ordered.HIGHEST_PRECEDENCE)
 public class RequestFilter implements Filter {
 
 	@Override
@@ -37,6 +37,7 @@ public class RequestFilter implements Filter {
 		httpResponse.setHeader("Access-Control-Allow-Headers","x-requested-with");
 		httpResponse.setHeader("Access-Control-Max-Age","3600");
 		httpResponse.setHeader("Access-Control-Allow-Credentials","true");
+		httpResponse.setHeader("Content-Type","application/json");
 		System.out.println(IOUtils.toString(httpRequest.getReader()));
 		if(!(httpRequest.getMethod().equalsIgnoreCase("OPTIONS"))){
 			try{
@@ -47,16 +48,12 @@ public class RequestFilter implements Filter {
 		}else{
 			System.out.println("Pre-flight");
 			httpResponse.setHeader("Access-Control-Allow-Methods","POST,GET,DELETE");
-			httpResponse.setHeader("Access-Control-Allow-Headers","authorization,content-type,"
+			httpResponse.setHeader("Access-Control-Allow-Headers","authorization,content-type,Content-Type:application/json,"
 					+ "access-control-request-headers,access-control-request-method,"
 					+ "accept,origin,authorization,x-requested-with");
 			httpResponse.setHeader("Access-Control-Max-Age","3600");
 			httpResponse.setStatus(HttpServletResponse.SC_OK);
 		}
-		
-		
-		
-
 	}
 
 	@Override

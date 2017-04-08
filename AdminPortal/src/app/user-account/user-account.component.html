@@ -9,30 +9,29 @@
             <th>Phone</th>
             <th>Primary Account</th>
             <th>Saving Account</th>
-            <th>Enabled</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <tr ngFor="let user of userList">
-            <td>{{user.userName}}</td>
+        <tr *ngFor="let user of userList">
+            <td>{{user.username}}</td>
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
             <td>{{user.email}} </td>
             <td>{{user.phone}}</td>
             <td>
-                <a (click)='onSelectPrimary(user.userName)' style="cursor:pointer">
+                <a (click)='onSelectPrimary(user.username)' style="cursor:pointer">
                    {{user.primaryAccount.accountBalance}}</a>
             </td>
             <td>
-                <a (click)='onSelectSecondary(user.userName)' style="cursor:pointer">
-                   {{user.savingAccount.accountBalance}}</a>
+                <a (click)='onSelectSecondary(user.username)' style="cursor:pointer">
+                   {{user.savingsAccount.accountBalance}}</a>
             </td>
-            <td [hidden]="user.enabled"><a (click)="enableUser(user.userName)" style="cursor:pointer">
-              Enable </a>
+            <td [hidden]="!user.enabled"><a (click)="disableUser(user.username)" style="cursor:pointer">
+              Disable </a>
             </td>
-            <td [hidden]="!user.enabled"><a (click)="enableUser(user.userName)" style="cursor:pointer">
-              Disabled </a>
+            <td [hidden]="user.enabled"><a (click)="enableUser(user.username)" style="cursor:pointer">
+              Enable</a>
             </td>
     </tbody>
 </table>

@@ -25,8 +25,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('user' + this.username);
-    console.log('password' + this.password);
     this._loginService.sendCredential(this.username, this.password).subscribe(
       res => {
         this.loggedIn = true;
@@ -38,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.setItem('PortalAdminHasLoggedIn', '');
+
   }
 
 }

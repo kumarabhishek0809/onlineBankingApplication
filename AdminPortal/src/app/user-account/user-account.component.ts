@@ -1,45 +1,55 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../user.service';
+import { User } from '../user-account/user';
 
 @Component({
-  selector: 'app-user-account',
-  templateUrl: './user-account.component.html',
-  styleUrls: ['./user-account.component.css']
+	selector: 'app-user-account',
+	templateUrl: './user-account.component.html',
+	styleUrls: ['./user-account.component.css']
 })
 export class UserAccountComponent implements OnInit {
 
-  userList: Object[];
-  constructor(private _userService: UserService, private _router: Router) {
-    this.getUsers();
-  }
+	private userList: User[];
+	private errorMessage: String;
 
-  getUsers() {
-    console.log('Inside User Service');
-    this._userService.getUsers().subscribe(
-      res => { this.userList = JSON.parse(JSON.parse(JSON.stringify(res))._body); },
-      error => console.log(error)
-    );
-  }
+	constructor(private userService: UserService,
+		private router: Router) {
 
-  onSelectPrimary(userName: String) {
-    this._router.navigate(['/primaryTranacation', userName]);
-  }
+	}
 
-  onSelectSecondary(userName: String) {
-    this._router.navigate(['/secondaryTranacation', userName]);
-  }
+	getUsers(): User[] {
+		return this.userList;
+	}
 
-  enableUser(userName: String) {
-    this._userService.enableUser(userName).subscribe();
-    location.reload();
-  }
+	onSelectPrimary(username: String) {
+		console.log('Inside onSelectPrimary' + username);
+		this.router.navigate(['/primaryTransaction', username]);
+	}
 
-  disableUser(userName: String) {
-    this._userService.disableUser(userName).subscribe();
-    location.reload();
-  }
-  ngOnInit() {
-  }
+	onSelectSavings(username: String) {
+		console.log('Inside onSelectSavings' + username);
+		this.router.navigate(['/savingsTransactions', username]);
+	}
+
+	enableUser(username: string) {
+		console.log('enableUser');
+		this.userService.enableUser(username).subscribe();
+		location.reload();
+	}
+
+	disableUser(username: string) {
+		console.log('disableUser');
+		this.userService.disableUser(username).subscribe();
+		location.reload();
+	}
+
+
+	ngOnInit() {
+		this.userService.getUsers()
+			.subscribe(
+			responseUser => this.userList = responseUser,
+			responseError => this.errorMessage = responseError);
+	}
 
 }

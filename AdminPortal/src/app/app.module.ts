@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { LoginService } from './login.service';
 import { UserService } from './user.service';
 import { UserAccountComponent } from './user-account/user-account.component';
+import { PrimarytransactionComponent } from './primarytransaction/primarytransaction.component';
+import { SavingstransactionComponent } from './savingstransaction/savingstransaction.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { UserAccountComponent } from './user-account/user-account.component';
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    UserAccountComponent
+    UserAccountComponent,
+    PrimarytransactionComponent,
+    SavingstransactionComponent
   ],
   imports: [
     BrowserModule,
