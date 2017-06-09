@@ -1,5 +1,7 @@
 package com.onlineBankingApplication.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	public Appointment findAppointment(Long id) {
-		return appointmentDao.findOne(id);
+		Optional<Appointment> findById = appointmentDao.findById(id);
+		return findById.isPresent() ? findById.get() : null;
 	}
 
 	public void confirmAppointment(Long id) {
