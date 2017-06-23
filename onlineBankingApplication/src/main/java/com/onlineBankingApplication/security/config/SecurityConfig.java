@@ -24,7 +24,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String SALT = "salt"; // Salt should be protected
 												// carefully
-
+//	@Bean
+//	public ThymeleafViewResolver viewResolver() {
+//	    ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+//	    viewResolver.setViewClass(ThymeleafTilesView.class);
+//	    viewResolver.setTemplateEngine(templateEngine());
+//	    viewResolver.setCharacterEncoding("UTF-8");
+//	    viewResolver.setOrder(0);//HERE!!
+//	    return viewResolver;
+//	}
+	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(12, new SecureRandom(SALT.getBytes()));

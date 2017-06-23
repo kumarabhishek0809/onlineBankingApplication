@@ -28,16 +28,18 @@ repositories {
 
 
 dependencies {
+	compile('org.springframework.boot:spring-boot-starter-amqp')
 	compile('org.springframework.boot:spring-boot-starter-activemq')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.amqp:spring-rabbit')
 	compile('org.springframework:spring-jms')
 	compile('org.springframework.integration:spring-integration-jms')
 	compile('org.apache.activemq:activemq-broker')
     compile('org.apache.activemq:activemq-client')
-	
 	compile('org.apache.commons:commons-lang3:3.5')
 	compile('commons-io:commons-io:2.5');
 	compile('mysql:mysql-connector-java:6.0.5')

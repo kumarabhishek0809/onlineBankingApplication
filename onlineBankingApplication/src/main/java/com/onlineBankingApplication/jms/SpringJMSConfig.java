@@ -23,24 +23,24 @@ import org.springframework.jms.support.destination.DestinationResolver;
 @EnableJms
 public class SpringJMSConfig {
 
-	@Autowired
-	private BeanFactory springContextBeanFactory;
+//	@Autowired
+//	private BeanFactory springContextBeanFactory;
 
 	@Bean
 	public JmsListenerContainerFactory<?> containerFactory(ConnectionFactory connectionFactory,
 			DefaultJmsListenerContainerFactoryConfigurer configurer) {
 		DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
 		configurer.configure(factory, connectionFactory);
-		//factory.setDestinationResolver(destinationResolver());
+		/* factory.setDestinationResolver(destinationResolver()); */
 		factory.setConcurrency("3-10");
 		return factory;
 	}
-//
+
 //	@Bean
 //	public DestinationResolver destinationResolver() {
 //		return new BeanFactoryDestinationResolver(springContextBeanFactory);
 //	}
-//
+
 //	@Bean
 //	public JmsTemplate jmsTemplate(ConnectionFactory connectionFactory) throws JMSException {
 //		JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory);
@@ -58,13 +58,13 @@ public class SpringJMSConfig {
 
 	/*
 	 * 
-	 * public static void main(String[] args) { // Launch the application
+	 * public static void main(String[] args) { Launch the application
 	 * ConfigurableApplicationContext context =
 	 * SpringApplication.run(SpringJMSConfig.class, args);
 	 * 
 	 * JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
 	 * 
-	 * // Send a message with a POJO - the template reuse the message converter
+	 * Send a message with a POJO - the template reuse the message converter
 	 * System.out.println("Sending an email message.");
 	 * jmsTemplate.convertAndSend("mailBoxDestination", new
 	 * Email("info@example.com", "Hello")); }
