@@ -20,13 +20,13 @@ export class UserService {
 
 
   getPrimaryTransactionList(userName: String) {
-    let url = "http://localhost:5050/api/user/primary/transaction?userName" + userName;
+    let url = "http://localhost:5050/api/user/primary/transaction?username=" + userName;
     return this._http.get(url).map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json() || 'Server'));
   }
 
   getSavingsTransactionList(userName: String) {
-    let url = "http://localhost:5050/api/user/savings/transaction?userName" + userName;
+    let url = "http://localhost:5050/api/user/savings/transaction?username" + userName;
     return this._http.get(url).map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json() || 'Server'));
   }

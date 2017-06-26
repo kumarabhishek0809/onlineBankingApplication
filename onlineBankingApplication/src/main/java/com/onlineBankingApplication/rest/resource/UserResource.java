@@ -1,6 +1,8 @@
 package com.onlineBankingApplication.rest.resource;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.onlineBankingApplication.domain.PrimaryTransaction;
 import com.onlineBankingApplication.domain.SavingsTransaction;
 import com.onlineBankingApplication.domain.User;
+import com.onlineBankingApplication.mq.rabbit.MessageService;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
 
@@ -26,6 +29,8 @@ public class UserResource {
 	
 	@Autowired
 	private TransactionService transactionService;
+	@Autowired
+	private MessageService messageServices;
 	
 	@RequestMapping(value = "/user/all", method = RequestMethod.GET , produces = "application/json")
 	public List<User> userList(){
@@ -44,7 +49,11 @@ public class UserResource {
 	
 	@RequestMapping(value="/user/primary/transaction",method = RequestMethod.GET)
 	public List<PrimaryTransaction> getPrimaryTransactionList(@RequestParam("username") String username){
-		return transactionService.findPrimaryTransactionList(username);
+		List<PrimaryTransaction> findPrimaryTransactionList = transactionService.findPrimaryTransactionList(username);
+		Map<String, String> message = new HashMap<String,String>();
+		message.put("MessageTransaction", findPrimaryTransactionList.toString());
+		messageServices.sendMessage(message);
+		return findPrimaryTransactionList;
 	}
 	
 	@RequestMapping(value="/user/saving/transaction",method = RequestMethod.GET)

@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.jms;
+package com.onlineBankingApplication.mq.rabbit;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -10,10 +10,10 @@ import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//@SpringBootApplication
 @Configuration
 public class SpringBootRabbitMQApplication {
 
+	private static final String ONLINE_RABBIT_MESSAGE_EXCHANGE = "ONLINE-MESSAGE-EXCHANGE";
 	public final static String ONLINE_RABBIT_MESSAGE_QUEUE = "ONLINE-MESSAGE-QUEUE";
 
 	@Bean
@@ -23,7 +23,7 @@ public class SpringBootRabbitMQApplication {
 
 	@Bean
 	TopicExchange exchange() {
-		return new TopicExchange("spring-boot-exchange");
+		return new TopicExchange(ONLINE_RABBIT_MESSAGE_EXCHANGE);
 	}
 
 	@Bean
@@ -45,8 +45,4 @@ public class SpringBootRabbitMQApplication {
 	MessageListenerAdapter listenerAdapter(RabbitMessageListener receiver) {
 		return new MessageListenerAdapter(receiver, "receiveMessage");
 	}
-
-	// public static void main(String[] args) {
-	// SpringApplication.run(SpringBootRabbitMQApplication.class, args);
-	// }
 }

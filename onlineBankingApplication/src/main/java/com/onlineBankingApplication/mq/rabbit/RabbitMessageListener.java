@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.jms;
+package com.onlineBankingApplication.mq.rabbit;
 
 import java.util.Map;
 

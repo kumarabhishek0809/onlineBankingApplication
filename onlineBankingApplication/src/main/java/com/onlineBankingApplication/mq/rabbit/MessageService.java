@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.jms;
+package com.onlineBankingApplication.mq.rabbit;
 
 import java.util.Map;
 
@@ -12,8 +12,8 @@ public class MessageService {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
-	public void sendMessage(Map<String, String> actionmap) {
-		rabbitTemplate.convertAndSend(SpringBootRabbitMQApplication.ONLINE_RABBIT_MESSAGE_QUEUE, actionmap);
+	public void sendMessage(Map<String, String> message) {
+		rabbitTemplate.convertAndSend(SpringBootRabbitMQApplication.ONLINE_RABBIT_MESSAGE_QUEUE, message);
 		
 	}
 }

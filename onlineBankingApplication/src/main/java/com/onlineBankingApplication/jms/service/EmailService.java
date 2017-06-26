@@ -1,6 +1,8 @@
-package com.onlineBankingApplication.jms;
+package com.onlineBankingApplication.jms.service;
 
 import org.springframework.stereotype.Service;
+
+import com.onlineBankingApplication.jms.domain.Email;
 
 @Service
 public class EmailService {

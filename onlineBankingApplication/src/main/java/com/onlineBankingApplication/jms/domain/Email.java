@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.jms;
+package com.onlineBankingApplication.jms.domain;
 
 import java.io.Serializable;
 

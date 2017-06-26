@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
+import com.onlineBankingApplication.jms.domain.Email;
+import com.onlineBankingApplication.jms.service.EmailService;
+
 @Component
 public class Receiver {
 	

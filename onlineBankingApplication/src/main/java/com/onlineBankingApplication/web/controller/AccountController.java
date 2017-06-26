@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.onlineBankingApplication.domain.User;
-import com.onlineBankingApplication.jms.MessageService;
+import com.onlineBankingApplication.mq.rabbit.MessageService;
 import com.onlineBankingApplication.service.AccountService;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
