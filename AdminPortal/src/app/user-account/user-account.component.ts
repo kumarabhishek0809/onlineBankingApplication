@@ -29,7 +29,7 @@ export class UserAccountComponent implements OnInit {
 
 	onSelectSavings(username: String) {
 		console.log('Inside onSelectSavings' + username);
-		this.router.navigate(['/savingsTransactions', username]);
+		this.router.navigate(['/savingsTransaction', username]);
 	}
 
 	enableUser(username: string) {

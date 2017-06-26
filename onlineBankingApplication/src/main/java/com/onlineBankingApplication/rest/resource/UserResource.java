@@ -56,7 +56,7 @@ public class UserResource {
 		return findPrimaryTransactionList;
 	}
 	
-	@RequestMapping(value="/user/saving/transaction",method = RequestMethod.GET)
+	@RequestMapping(value="/user/savings/transaction",method = RequestMethod.GET)
 	public List<SavingsTransaction> getSavingsTransactionList(@RequestParam("username") String username){
 		return transactionService.findSavingsTransactionList(username);
 	}

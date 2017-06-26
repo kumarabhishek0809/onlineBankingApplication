@@ -24,7 +24,7 @@
                    {{user.primaryAccount.accountBalance}}</a>
             </td>
             <td>
-                <a (click)='onSelectSecondary(user.username)' style="cursor:pointer">
+                <a (click)='onSelectSavings(user.username)' style="cursor:pointer">
                    {{user.savingsAccount.accountBalance}}</a>
             </td>
             <td [hidden]="!user.enabled"><a (click)="disableUser(user.username)" style="cursor:pointer">

@@ -26,7 +26,7 @@ export class UserService {
   }
 
   getSavingsTransactionList(userName: String) {
-    let url = "http://localhost:5050/api/user/savings/transaction?username" + userName;
+    let url = "http://localhost:5050/api/user/savings/transaction?username=" + userName;
     return this._http.get(url).map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json() || 'Server'));
   }
