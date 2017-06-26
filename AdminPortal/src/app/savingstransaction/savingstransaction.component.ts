@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class SavingstransactionComponent implements OnInit {
 
   username: String;
-  savingsTransaction: SavingsTransaction;
+  savingsTransactions: SavingsTransaction[];
   errorMessage: String;
 
   constructor(private _userService: UserService, private _route: ActivatedRoute) {
@@ -22,7 +22,7 @@ export class SavingstransactionComponent implements OnInit {
 
   ngOnInit() {
     this._userService.getSavingsTransactionList(this.username).subscribe(
-      response => this.savingsTransaction = response,
+      response => this.savingsTransactions = response,
       errorMessage => this.errorMessage = errorMessage
     );
   }
