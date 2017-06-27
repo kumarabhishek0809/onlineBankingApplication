@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.onlineBankingApplication.domain.PrimaryTransaction;
 import com.onlineBankingApplication.domain.SavingsTransaction;
 import com.onlineBankingApplication.domain.User;
-import com.onlineBankingApplication.mq.rabbit.MessageService;
+import com.onlineBankingApplication.mq.rabbit.Producer;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
 
@@ -30,7 +31,13 @@ public class UserResource {
 	@Autowired
 	private TransactionService transactionService;
 	@Autowired
-	private MessageService messageServices;
+	private Producer messageServices;
+	
+	@Value("${spring.rabbit.amqp.exchange}")
+	private String onlineRabbitMessageExchange;
+	
+	@Value("${spring.rabbit.amqp.queue}")
+	private String onlineRabbitMessageQueue;
 	
 	@RequestMapping(value = "/user/all", method = RequestMethod.GET , produces = "application/json")
 	public List<User> userList(){
@@ -52,7 +59,7 @@ public class UserResource {
 		List<PrimaryTransaction> findPrimaryTransactionList = transactionService.findPrimaryTransactionList(username);
 		Map<String, String> message = new HashMap<String,String>();
 		message.put("MessageTransaction", findPrimaryTransactionList.toString());
-		messageServices.sendMessage(message);
+		messageServices.sendMessage(onlineRabbitMessageExchange,onlineRabbitMessageQueue,message);
 		return findPrimaryTransactionList;
 	}
 	

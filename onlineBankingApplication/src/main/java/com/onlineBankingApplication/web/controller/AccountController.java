@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.onlineBankingApplication.domain.User;
-import com.onlineBankingApplication.mq.rabbit.MessageService;
+import com.onlineBankingApplication.mq.rabbit.Producer;
 import com.onlineBankingApplication.service.AccountService;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
@@ -31,7 +32,13 @@ public class AccountController {
 	private TransactionService transactionService;
 
 	@Autowired
-	private MessageService messageServices;
+	private Producer messageServices;
+	
+	@Value("${spring.rabbit.amqp.exchange}")
+	private String onlineRabbitMessageExchange;
+	
+	@Value("${spring.rabbit.amqp.queue}")
+	private String onlineRabbitMessageQueue;
 
 	@RequestMapping("/primaryAccount")
 	public String primaryAccount(Model model, Principal principal) {
@@ -64,7 +71,7 @@ public class AccountController {
 		Map<String, String> actionmap = new HashMap<>();
 		actionmap.put("accountType", accountType);
 		actionmap.put("amount", amount);
-		messageServices.sendMessage(actionmap);
+		messageServices.sendMessage(onlineRabbitMessageExchange,onlineRabbitMessageQueue,actionmap);
 
 		accountService.deposit(accountType, Double.parseDouble(amount), principal);
 		return "redirect:/userFront";

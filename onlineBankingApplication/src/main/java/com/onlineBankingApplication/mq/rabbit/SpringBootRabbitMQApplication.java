@@ -2,47 +2,51 @@ package com.onlineBankingApplication.mq.rabbit;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SpringBootRabbitMQApplication {
 
-	private static final String ONLINE_RABBIT_MESSAGE_EXCHANGE = "ONLINE-MESSAGE-EXCHANGE";
-	public final static String ONLINE_RABBIT_MESSAGE_QUEUE = "ONLINE-MESSAGE-QUEUE";
+	@Value("${spring.rabbit.amqp.exchange}")
+	private String onlineRabbitMessageExchange;
+
+	@Value("${spring.rabbit.amqp.queue}")
+	private String onlineRabbitMessageQueue;
+
+	@Value("${jms.mail.queue}")
+	private String destination;
 
 	@Bean
 	Queue queue() {
-		return new Queue(ONLINE_RABBIT_MESSAGE_QUEUE, false);
+		return new Queue(onlineRabbitMessageQueue, false);
 	}
 
 	@Bean
 	TopicExchange exchange() {
-		return new TopicExchange(ONLINE_RABBIT_MESSAGE_EXCHANGE);
+		return new TopicExchange(onlineRabbitMessageExchange);
 	}
 
 	@Bean
 	Binding binding(Queue queue, TopicExchange exchange) {
-		return BindingBuilder.bind(queue).to(exchange).with(ONLINE_RABBIT_MESSAGE_QUEUE);
+		return BindingBuilder.bind(queue).to(exchange).with(onlineRabbitMessageQueue);
 	}
 
 	@Bean
-	SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-			MessageListenerAdapter listenerAdapter) {
+	public SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListener consumer,
+			@Value("${spring.rabbit.amqp.queue}") String queueName) {
 		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
-		container.setQueueNames(ONLINE_RABBIT_MESSAGE_QUEUE);
-		container.setMessageListener(listenerAdapter);
+		container.setQueueNames(queueName);
+		container.setMessageListener(consumer);
 		return container;
 	}
 
-	@Bean
-	MessageListenerAdapter listenerAdapter(RabbitMessageListener receiver) {
-		return new MessageListenerAdapter(receiver, "receiveMessage");
-	}
 }
