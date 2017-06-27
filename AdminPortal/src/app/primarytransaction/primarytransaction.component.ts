@@ -11,9 +11,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrimarytransactionComponent implements OnInit {
 
-  username: String;
-  primaryTransactions: PrimaryTransaction[];
-  errorMessage: String;
+  private username: String;
+  private primaryTransactions: PrimaryTransaction[];
+  private errorMessage: String;
+  public primaryTransactionExists: Boolean = false;
   constructor(private userService: UserService,
     private route: ActivatedRoute) {
     this.route.params.forEach((params: Params) => {
