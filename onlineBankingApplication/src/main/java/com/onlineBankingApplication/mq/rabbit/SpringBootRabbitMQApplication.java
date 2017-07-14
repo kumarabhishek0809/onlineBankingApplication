@@ -21,9 +21,6 @@ public class SpringBootRabbitMQApplication {
 	@Value("${spring.rabbit.amqp.queue}")
 	private String onlineRabbitMessageQueue;
 
-	@Value("${jms.mail.queue}")
-	private String destination;
-
 	@Bean
 	Queue queue() {
 		return new Queue(onlineRabbitMessageQueue, false);

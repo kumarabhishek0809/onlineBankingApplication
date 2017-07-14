@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routing } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+
 import { LoginService } from './login.service';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -20,6 +20,7 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingRecipeComponent } from './shopping-recipe/shopping-recipe.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { BetterHighlightDirective } from './shared/better-highlight.directive';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { AppointmentComponent } from './appointment/appointment.component';
     UserAccountComponent,
     PrimarytransactionComponent,
     SavingstransactionComponent,
-    HeaderComponent,
+
     ShoppingListComponent,
     RecipesComponent,
     RecipeDetailComponent,
@@ -38,7 +39,8 @@ import { AppointmentComponent } from './appointment/appointment.component';
     RecipeItemComponent,
     ShoppingEditComponent,
     ShoppingRecipeComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    BetterHighlightDirective
   ],
   imports: [
     BrowserModule,

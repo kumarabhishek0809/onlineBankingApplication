@@ -27,6 +27,9 @@ export class PrimarytransactionComponent implements OnInit {
       .subscribe(
       responsePrimaryTransactions => this.primaryTransactions = responsePrimaryTransactions,
       responseError => this.errorMessage = responseError);
+    if (!this.primaryTransactions.length) {
+      this.primaryTransactionExists = false;
+    }
   }
 
 }

@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   loggedIn: boolean;
 
   constructor(private _loginService: LoginService, private router: Router) {
-    if (localStorage.getItem('PortalAdminHasLoggedIn') == '') {
+    if (localStorage.getItem('PortalAdminHasLoggedIn') === '') {
       this.loggedIn = false;
     } else {
       this.loggedIn = true;
