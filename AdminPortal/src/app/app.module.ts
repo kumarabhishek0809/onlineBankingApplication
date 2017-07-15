@@ -8,7 +8,9 @@ import { AppComponent } from './app.component';
 import { LoginService } from './login.service';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { UserService } from './user.service';
+import { ApplicantService } from './services/applicant.service';
+import { UserService } from './services/user.service';
+import { WebApiObservableService } from './services/webApiObservable.service';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { PrimarytransactionComponent } from './primarytransaction/primarytransaction.component';
 import { SavingstransactionComponent } from './savingstransaction/savingstransaction.component';
@@ -21,6 +23,8 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { ShoppingRecipeComponent } from './shopping-recipe/shopping-recipe.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { BetterHighlightDirective } from './shared/better-highlight.directive';
+import { ApplicantComponent } from './applicant/applicant.component';
+import { TelephonicInterviewComponent } from './telephonic-interview/telephonic-interview.component';
 
 
 @NgModule({
@@ -40,7 +44,9 @@ import { BetterHighlightDirective } from './shared/better-highlight.directive';
     ShoppingEditComponent,
     ShoppingRecipeComponent,
     AppointmentComponent,
-    BetterHighlightDirective
+    BetterHighlightDirective,
+    ApplicantComponent,
+    TelephonicInterviewComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,7 @@ import { BetterHighlightDirective } from './shared/better-highlight.directive';
     HttpModule,
     routing
   ],
-  providers: [LoginService, UserService],
+  providers: [LoginService, UserService, WebApiObservableService, ApplicantService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

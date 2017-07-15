@@ -1,11 +1,13 @@
-import { SavingstransactionComponent } from './savingstransaction/savingstransaction.component';
-import { PrimarytransactionComponent } from './primarytransaction/primarytransaction.component';
-import { UserAccountComponent } from './user-account/user-account.component';
 import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { ApplicantComponent } from './applicant/applicant.component';
 import { LoginComponent } from './login/login.component';
+import { PrimarytransactionComponent } from './primarytransaction/primarytransaction.component';
+import { SavingstransactionComponent } from './savingstransaction/savingstransaction.component';
 import { ShoppingRecipeComponent } from './shopping-recipe/shopping-recipe.component';
-import {AppointmentComponent} from './appointment/appointment.component';
+import { TelephonicInterviewComponent } from './telephonic-interview/telephonic-interview.component';
+import { UserAccountComponent } from './user-account/user-account.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 
 const appRoutes: Routes = [{
     path: '',
@@ -24,6 +26,7 @@ const appRoutes: Routes = [{
     path: 'appointment',
     component: AppointmentComponent
 },
+{ path: 'applicant', component: ApplicantComponent },
 {
     path: 'primaryTransaction/:username',
     component: PrimarytransactionComponent
@@ -35,8 +38,10 @@ const appRoutes: Routes = [{
 {
     path: 'shopingCart',
     component: ShoppingRecipeComponent
+},
+{
+    path: 'telephonicInterview', component: TelephonicInterviewComponent
 }
-
 ]
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

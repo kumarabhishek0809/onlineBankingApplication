@@ -11,6 +11,7 @@ public class Producer {
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
+	
 	public void sendMessage(String exchange,
 			String routingKey,Map<String, String> message) {
 		rabbitTemplate.convertAndSend(exchange,routingKey, message);

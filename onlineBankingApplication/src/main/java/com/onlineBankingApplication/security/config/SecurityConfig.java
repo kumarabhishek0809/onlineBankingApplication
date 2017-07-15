@@ -3,8 +3,11 @@ package com.onlineBankingApplication.security.config;
 import java.security.SecureRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +19,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableAutoConfiguration(exclude = {
+//        org.activiti.spring.boot.RestApiAutoConfiguration.class,
+//        org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
+//        org.activiti.spring.boot.SecurityAutoConfiguration.class})
+//@ComponentScan(basePackages = {"com.onlineBankingApplication"})
+@Order(99)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -40,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	private static final String[] PUBLIC_MATCHERS = { "/webjars/**", "/css/**", "/js/**", "/images/**", "/",
-			"/about/**", "/contact/**", "/error/**/*", "/console/**", "/api/**", "/signUp", "/userFront" };
+			"/about/**", "/contact/**", "/error/**/*", "/console/**", "/api/**", "/signUp", "/userFront","/applicant/**" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

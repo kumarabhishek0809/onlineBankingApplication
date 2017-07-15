@@ -35,13 +35,32 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    /// Activiti BPM
+	compile('org.springframework.boot:spring-boot-starter-test')
+	compile('org.activiti:activiti-spring-boot-starter-basic:5.21.0')
+	compile('org.activiti:activiti-spring-boot-starter-rest-api:5.21.0')
+	compile('org.activiti:activiti-spring-boot-starter-actuator:5.21.0')
+	compile('org.activiti:activiti-spring-boot-starter-jpa:5.21.0')
+	
+	compile('org.subethamail:subethasmtp-wiser:1.2')
+	compile('org.springframework.boot:spring-boot-starter-batch')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compile('org.springframework.data:spring-data-rest-hal-browser')
+	compile('org.springframework.boot:spring-boot-starter-integration')
+    
+    //for Rabbit
 	compile('org.springframework.amqp:spring-rabbit')
+	
+	//for JMS
 	compile('org.springframework:spring-jms')
+	//for Spring Integration.
 	compile('org.springframework.integration:spring-integration-jms')
 	compile('org.apache.activemq:activemq-broker')
     compile('org.apache.activemq:activemq-client')
+    //Apache Utils.
 	compile('org.apache.commons:commons-lang3:3.5')
 	compile('commons-io:commons-io:2.5');
+	//For DataBase
 	compile('mysql:mysql-connector-java:6.0.5')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
