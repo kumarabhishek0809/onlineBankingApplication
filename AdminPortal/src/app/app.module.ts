@@ -1,3 +1,4 @@
+import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +9,6 @@ import { AppComponent } from './app.component';
 import { LoginService } from './login.service';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ApplicantService } from './services/applicant.service';
 import { UserService } from './services/user.service';
 import { WebApiObservableService } from './services/webApiObservable.service';
 import { UserAccountComponent } from './user-account/user-account.component';
@@ -54,7 +54,10 @@ import { TelephonicInterviewComponent } from './telephonic-interview/telephonic-
     HttpModule,
     routing
   ],
-  providers: [LoginService, UserService, WebApiObservableService, ApplicantService],
+  providers: [LoginService,
+    UserService,
+    WebApiObservableService,
+    ShoppingListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

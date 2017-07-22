@@ -25,6 +25,7 @@ export class UserAccountComponent implements OnInit {
 	onSelectPrimary(username: String) {
 		console.log('Inside onSelectPrimary' + username);
 		this.router.navigate(['/primaryTransaction', username]);
+
 	}
 
 	onSelectSavings(username: String) {

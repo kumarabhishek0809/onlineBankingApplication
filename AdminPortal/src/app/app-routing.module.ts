@@ -9,39 +9,41 @@ import { TelephonicInterviewComponent } from './telephonic-interview/telephonic-
 import { UserAccountComponent } from './user-account/user-account.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 
-const appRoutes: Routes = [{
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-},
-{
-    path: 'login',
-    component: LoginComponent
-},
-{
-    path: 'userAccount',
-    component: UserAccountComponent
-},
-{
-    path: 'appointment',
-    component: AppointmentComponent
-},
-{ path: 'applicant', component: ApplicantComponent },
-{
-    path: 'primaryTransaction/:username',
-    component: PrimarytransactionComponent
-},
-{
-    path: 'savingsTransaction/:username',
-    component: SavingstransactionComponent
-},
-{
-    path: 'shopingCart',
-    component: ShoppingRecipeComponent
-},
-{
-    path: 'telephonicInterview', component: TelephonicInterviewComponent
-}
+const appRoutes: Routes = [
+    {
+        path: '',
+        redirectTo: '/login',
+        pathMatch: 'full'
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'userAccount',
+        component: UserAccountComponent
+    },
+    {
+        path: 'appointment',
+        component: AppointmentComponent
+    },
+    {
+        path: 'applicant',
+        component: ApplicantComponent
+    },
+    {
+        path: 'primaryTransaction/:username',
+        component: PrimarytransactionComponent
+    },
+    {
+        path: 'savingsTransaction/:username',
+        component: SavingstransactionComponent
+    },
+    {
+        path: 'shopingCart',
+        component: ShoppingRecipeComponent
+    }
 ]
+
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

@@ -29,22 +29,30 @@ export class WebApiObservableService {
     this.options = new RequestOptions({ headers: this.headers });
   }
 
-  createService(url: string, param: any): Observable<any> {
+  createPostService(url: string, param: any): Observable<any> {
     const body = JSON.stringify(param);
-    console.log("createService" + body);
+    console.log('createService --:' + body);
     return this.http
       .post(url, body, this.options)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  private extractData(res: Response) {
-    const body = res.json();
+  createGetService(url: string): Observable<any> {
+    console.log('createGetService --:' + url);
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  private extractData(response: Response) {
+    const body = response.json();
+    console.log('Inside Service' + body);
     return body || {};
   }
 
   private handleError(error: any) {
-    let errMsg = (error.message) ? error.message :
+    const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg);
     return Observable.throw(errMsg);

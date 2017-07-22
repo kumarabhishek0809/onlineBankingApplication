@@ -68,9 +68,10 @@ public class HireProcessRestController {
 				processInstanceID_businessKey, vars);
 		return applicantDB;
 	}
-
-	@RequestMapping(value = "/telephonic/{id}/select")
-	public void selectApplicant(@PathVariable("id") String id) {
+	//http://localhost:5050/applicant/telephonic/13/select
+	@RequestMapping(value = "/telephonic/{id}/select", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Applicant selectApplicant(@PathVariable("id") String id) {
+		Applicant applicantInDB = null;
 		if (StringUtils.isNotBlank(id)) {
 			ProcessInstance processInstance = runtimeService
 					.startProcessInstanceByKey(ApplicationConstants.HIRE_PROCESS_WITH_JPA, id);
@@ -90,12 +91,15 @@ public class HireProcessRestController {
 			taskService.complete(task.getId(), taskVariables);
 			
 			applicant.setCurrentState(ApplicationConstants.SELECT_APPLICANT);
-			applicantService.saveOrUpdateApplicant(applicant);
+			applicantInDB = applicantService.saveOrUpdateApplicant(applicant);
+			
 		}
+		return applicantInDB;
 	}
 
-	@RequestMapping(value = "/telephonic/{id}/reject")
-	public void rejectApplicant(@PathVariable("id") String id) {
+	@RequestMapping(value = "/telephonic/{id}/reject", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Applicant rejectApplicant(@PathVariable("id") String id) {
+		Applicant applicantInDB = null;
 		if (StringUtils.isNotBlank(id)) {
 			ProcessInstance processInstance = runtimeService
 					.startProcessInstanceByKey(ApplicationConstants.HIRE_PROCESS_WITH_JPA, id);
@@ -115,13 +119,17 @@ public class HireProcessRestController {
 			taskService.complete(task.getId(), taskVariables);
 			
 			applicant.setCurrentState(ApplicationConstants.REJECT_APPLICANT);
-			applicantService.saveOrUpdateApplicant(applicant);
+			applicantInDB = applicantService.saveOrUpdateApplicant(applicant);
 		}
+		return applicantInDB;
 	}
 
+	//http://localhost:5050/applicant/telephonic/all
 	@RequestMapping(value = "telephonic/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Applicant> getTelephonicCandidates() {
-		return applicantService.findByCurrentState(ApplicationConstants.RESUME_SUBMITTED);
+		List<Applicant> findByCurrentState = applicantService.findByCurrentState(ApplicationConstants.RESUME_SUBMITTED);
+		System.out.println(findByCurrentState);
+		return findByCurrentState;
 	}
 
 }
