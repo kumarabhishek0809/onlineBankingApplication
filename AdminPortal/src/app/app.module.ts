@@ -1,3 +1,5 @@
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth-guard.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -25,6 +27,7 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import { BetterHighlightDirective } from './shared/better-highlight.directive';
 import { ApplicantComponent } from './applicant/applicant.component';
 import { TelephonicInterviewComponent } from './telephonic-interview/telephonic-interview.component';
+import { WorkappointmentComponent } from './appointment/workappointment/workappointment.component';
 
 
 @NgModule({
@@ -46,7 +49,8 @@ import { TelephonicInterviewComponent } from './telephonic-interview/telephonic-
     AppointmentComponent,
     BetterHighlightDirective,
     ApplicantComponent,
-    TelephonicInterviewComponent
+    TelephonicInterviewComponent,
+    WorkappointmentComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,9 @@ import { TelephonicInterviewComponent } from './telephonic-interview/telephonic-
   providers: [LoginService,
     UserService,
     WebApiObservableService,
-    ShoppingListService],
+    ShoppingListService,
+    AuthGuard,
+    AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,6 +23,9 @@ import com.onlineBankingApplication.domain.SavingsTransaction;
 import com.onlineBankingApplication.domain.User;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
+import com.onlineBankingApplication.service.sp.DataAccessRepository;
+import com.onlineBankingApplication.service.sp.Input;
+import com.onlineBankingApplication.service.sp.Result;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -42,6 +45,8 @@ public class TransactionServiceImpl implements TransactionService {
 	private SavingAccountDao savingAccountDao;
 	@Autowired
 	private RecipientDao recipientDao;
+	@Autowired
+	private DataAccessRepository dataAccessRepository;
 
 	private static final String SAVINGS = "Savings";
 
@@ -50,6 +55,8 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public List<PrimaryTransaction> findPrimaryTransactionList(String username) {
 		User user = userService.findByUserName(username);
+		Long accountNumber = user.getPrimaryAccount().getId();
+		List<Result> storedProcCall = dataAccessRepository.storedProcCall(accountNumber);
 		return user.getPrimaryAccount().getPrimaryTransactions();
 	}
 

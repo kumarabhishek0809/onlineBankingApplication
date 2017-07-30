@@ -1,3 +1,5 @@
+import { AuthGuard } from './auth-guard.service';
+import { WorkappointmentComponent } from './appointment/workappointment/workappointment.component';
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApplicantComponent } from './applicant/applicant.component';
@@ -25,11 +27,21 @@ const appRoutes: Routes = [
     },
     {
         path: 'appointment',
-        component: AppointmentComponent
+        component: AppointmentComponent,
+        children: [{
+            path: 'workappointment',
+            component: WorkappointmentComponent
+        }]
     },
     {
         path: 'applicant',
-        component: ApplicantComponent
+        component: ApplicantComponent,
+        children: [
+            {
+                path: 'telephonicInterview',
+                component: TelephonicInterviewComponent
+            }
+        ]
     },
     {
         path: 'primaryTransaction/:username',
@@ -37,6 +49,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'savingsTransaction/:username',
+        canActivate: [AuthGuard],
         component: SavingstransactionComponent
     },
     {
