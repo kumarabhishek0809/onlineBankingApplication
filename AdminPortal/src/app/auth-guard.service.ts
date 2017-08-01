@@ -16,6 +16,7 @@ export class AuthGuard implements CanActivate {
             (authenticated: boolean) => {
                 console.log('Inside Guard Service authenticated ::::' + authenticated);
                 if (authenticated) {
+                    this.router.routerState;
                     return true;
                 } else {
                     this.router.navigate(['/']);

@@ -21,6 +21,7 @@ export class SavingstransactionComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('SavingstransactionComponent');
     this._userService.getSavingsTransactionList(this.username).subscribe(
       response => this.savingsTransactions = response,
       errorMessage => this.errorMessage = errorMessage

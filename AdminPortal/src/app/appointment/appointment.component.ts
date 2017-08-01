@@ -1,3 +1,4 @@
+import { AuthService } from '../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Form } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -10,13 +11,18 @@ import { NgModule } from '@angular/core';
 })
 export class AppointmentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   onSubmitApplicant(form: Form) {
-
   }
 
   ngOnInit() {
   }
 
+  onLogin() {
+    this.authService.login();
+  }
+  onLogout() {
+    this.authService.logOut();
+  }
 }

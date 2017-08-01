@@ -4,7 +4,7 @@ import { setTimeout } from 'timers';
 @Injectable()
 export class AuthService {
 
-    loggedIn = true;
+    loggedIn = false;
 
     isAuthenticated() {
         const promise = new Promise((resolve, reject) => {

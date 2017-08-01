@@ -35,6 +35,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    //Spring Batch
+    compile('org.springframework.boot:spring-boot-starter-batch')
     /// Activiti BPM
 	compile('org.springframework.boot:spring-boot-starter-test')
 	compile('org.activiti:activiti-spring-boot-starter-basic:5.21.0')
