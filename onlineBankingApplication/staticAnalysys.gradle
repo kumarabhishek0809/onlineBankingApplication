@@ -1,0 +1,127 @@
+apply plugin: 'jacoco'
+apply plugin: 'findbugs'
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'cpd'
+apply plugin: 'jdepend'
+
+/*
+Version is required due to compatibility issues
+ */
+jacoco {
+    toolVersion = '0.7.1.201405082137'
+}
+
+findbugs {
+    sourceSets = [sourceSets.main]
+    ignoreFailures = true
+    effort = "max"
+    tasks.withType(FindBugs) {
+        reports {
+            xml.enabled = true
+            html.enabled = false
+        }
+    }
+}
+
+checkstyle {
+    configFile = file("${project.rootDir}/checkstyle.xml")
+    ignoreFailures = true
+    sourceSets = [sourceSets.main]
+    toolVersion = '8.1'
+
+    tasks.withType(Checkstyle) {
+        reports {
+            xml.enabled true
+        }
+    }
+}
+
+pmd {
+    ignoreFailures = true
+    pmdTest.enabled=false
+
+    tasks.withType(Pmd){
+        reports{
+            xml.enabled=true
+            html.enabled=false
+        }
+    }
+}
+
+cpdCheck {
+    /*
+    Disable Cpd by default. To call Pmd use 'pmdMain'
+     */
+    enabled = gradle.startParameter.taskNames.contains(name)
+    reports {
+        text.enabled = false
+        xml.enabled = true
+    }
+    source = sourceSets.main.allJava
+    ignoreFailures = true
+    skipLexicalErrors = true
+}
+
+jdepend {
+    sourceSets = [sourceSets.main]
+    ignoreFailures = true
+}
+
+jdependMain {
+    enabled = gradle.startParameter.taskNames.contains(name)
+    reports {
+        xml.enabled true
+        text.enabled false
+    }
+}
+
+test {
+    jacoco {
+        /*
+        Disable jacoco by default. To call jacoco use 'jacocoTestReport'
+         */
+        enabled = gradle.startParameter.taskNames.contains('jacocoTestReport')
+    }
+}
+
+subprojects {
+    jacocoTestReport {
+        reports {
+            xml.enabled true
+            csv.enabled false
+            html.enabled true
+        }
+
+        doFirst {
+            try {
+                classDirectories = files(classDirectories.files.collect {
+                    fileTree(dir: it, exclude: sourceSets.generated.java)
+                })
+            } catch (e) {
+                println "jacoco: no exclusion patterns due to ${e.message}"
+            }
+        }
+    }
+
+    /*
+    Disable findbugs by default. To call findbugs use 'findbugsMain'
+     */
+    tasks.withType(FindBugs) {
+        task -> enabled = gradle.startParameter.taskNames.contains(task.name)
+    }
+
+    /*
+    Disable Checkstyle by default. To call Checkstyle use 'checkstyleMain'
+     */
+    tasks.withType(Checkstyle) {
+        task -> enabled = gradle.startParameter.taskNames.contains(task.name)
+    }
+
+    /*
+    Disable Pmd by default. To call Pmd use 'pmdMain'
+     */
+    tasks.withType(Pmd) {
+        task -> enabled = gradle.startParameter.taskNames.contains(task.name)
+    }
+}
