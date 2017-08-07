@@ -2,7 +2,6 @@ apply plugin: 'jacoco'
 apply plugin: 'findbugs'
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
-apply plugin: 'cpd'
 apply plugin: 'jdepend'
 
 /*
@@ -47,20 +46,6 @@ pmd {
             html.enabled=false
         }
     }
-}
-
-cpdCheck {
-    /*
-    Disable Cpd by default. To call Pmd use 'pmdMain'
-     */
-    enabled = gradle.startParameter.taskNames.contains(name)
-    reports {
-        text.enabled = false
-        xml.enabled = true
-    }
-    source = sourceSets.main.allJava
-    ignoreFailures = true
-    skipLexicalErrors = true
 }
 
 jdepend {
