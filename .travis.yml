@@ -1,5 +1,4 @@
 language: java
-gradle : check
 jdk:
     - oraclejdk8
 before_script:
@@ -8,3 +7,8 @@ before_script:
     - export GRADLE_HOME=$PWD/gradle-4.1
     - export PATH=$GRADLE_HOME/bin:$PATH
     - cd onlineBankingApplication
+script:
+  - ./gradlew check
+  - ./gradlew codeCoverageReport
+after_success:
+  - bash <(curl -s https://codecov.io/bash)  

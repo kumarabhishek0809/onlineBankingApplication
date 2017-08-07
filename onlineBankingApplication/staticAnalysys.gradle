@@ -48,6 +48,7 @@ pmd {
     }
 }
 
+
 jdepend {
     sourceSets = [sourceSets.main]
     ignoreFailures = true
@@ -63,9 +64,6 @@ jdependMain {
 
 test {
     jacoco {
-        /*
-        Disable jacoco by default. To call jacoco use 'jacocoTestReport'
-         */
         enabled = gradle.startParameter.taskNames.contains('jacocoTestReport')
     }
 }
@@ -109,4 +107,23 @@ subprojects {
     tasks.withType(Pmd) {
         task -> enabled = gradle.startParameter.taskNames.contains(task.name)
     }
+    
+    codeCoverageReport.dependsOn {
+    	subprojects*.test
+}
+task codeCoverageReport(type: JacocoReport) {
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    subprojects.each {
+        sourceSets it.sourceSets.main
+    }
+
+    reports {
+        xml.enabled true
+        xml.destination "${buildDir}/reports/jacoco/report.xml"
+        html.enabled false
+        csv.enabled false
+    }
+}
+
 }
