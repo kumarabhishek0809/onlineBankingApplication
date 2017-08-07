@@ -1,3 +1,5 @@
+import { ModelDrivenForm } from './forms/modeldriven/modeldrivenform-page.component';
+import { TemplateDrivenForm } from './forms/templatedriven/templatedrivenform-page.component';
 import { AuthGuard } from './auth-guard.service';
 import { WorkappointmentComponent } from './appointment/workappointment/workappointment.component';
 import { ModuleWithProviders } from '@angular/core';
@@ -55,7 +57,15 @@ const appRoutes: Routes = [
     {
         path: 'shopingCart',
         component: ShoppingRecipeComponent
-    }
+    },
+    {
+        path: 'templateDrivenForm',
+        component: TemplateDrivenForm
+    },
+    {
+        path: 'modelDrivenForm',
+        component: ModelDrivenForm
+    },
 ]
 
 

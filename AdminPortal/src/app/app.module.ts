@@ -1,13 +1,14 @@
+import { ModelDrivenForm } from './forms/modeldriven/modeldrivenform-page.component';
+import { TemplateDrivenForm } from './forms/templatedriven/templatedrivenform-page.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routing } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { LoginService } from './login.service';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -38,7 +39,8 @@ import { WorkappointmentComponent } from './appointment/workappointment/workappo
     UserAccountComponent,
     PrimarytransactionComponent,
     SavingstransactionComponent,
-
+    TemplateDrivenForm,
+    ModelDrivenForm,
     ShoppingListComponent,
     RecipesComponent,
     RecipeDetailComponent,
@@ -56,7 +58,8 @@ import { WorkappointmentComponent } from './appointment/workappointment/workappo
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    ReactiveFormsModule
   ],
   providers: [LoginService,
     UserService,
