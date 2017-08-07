@@ -1,0 +1,5 @@
+language: java
+gradle : check
+jdk: oraclejdk8
+TRAVIS_BUILD_DIR : /onlineBankingApplication
+before_script: cd onlineBankingApplication
