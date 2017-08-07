@@ -4,9 +4,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'pmd'
 apply plugin: 'jdepend'
 
-/*
-Version is required due to compatibility issues
- */
+
 jacoco {
     toolVersion = '0.7.1.201405082137'
 }
@@ -68,49 +66,7 @@ test {
     }
 }
 
-subprojects {
-    jacocoTestReport {
-        reports {
-            xml.enabled true
-            csv.enabled false
-            html.enabled true
-        }
 
-        doFirst {
-            try {
-                classDirectories = files(classDirectories.files.collect {
-                    fileTree(dir: it, exclude: sourceSets.generated.java)
-                })
-            } catch (e) {
-                println "jacoco: no exclusion patterns due to ${e.message}"
-            }
-        }
-    }
-
-    /*
-    Disable findbugs by default. To call findbugs use 'findbugsMain'
-     */
-    tasks.withType(FindBugs) {
-        task -> enabled = gradle.startParameter.taskNames.contains(task.name)
-    }
-
-    /*
-    Disable Checkstyle by default. To call Checkstyle use 'checkstyleMain'
-     */
-    tasks.withType(Checkstyle) {
-        task -> enabled = gradle.startParameter.taskNames.contains(task.name)
-    }
-
-    /*
-    Disable Pmd by default. To call Pmd use 'pmdMain'
-     */
-    tasks.withType(Pmd) {
-        task -> enabled = gradle.startParameter.taskNames.contains(task.name)
-    }
-    
-    codeCoverageReport.dependsOn {
-    	subprojects*.test
-}
 task codeCoverageReport(type: JacocoReport) {
     executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
@@ -126,4 +82,6 @@ task codeCoverageReport(type: JacocoReport) {
     }
 }
 
+codeCoverageReport.dependsOn {
+    subprojects*.test
 }
