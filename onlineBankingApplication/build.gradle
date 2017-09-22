@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.M1'
+		springBootVersion = '2.0.0.M4'
 	}
 	repositories {
 		mavenCentral()
@@ -9,6 +9,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('se.transmode.gradle:gradle-docker:1.2')
 	}
 }
 
@@ -18,9 +19,10 @@ allprojects {
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management' 
 	apply plugin: 'jacoco'
+	apply plugin: 'docker'
 
-
-	version = '0.0.1-SNAPSHOT'
+	archivesBaseName = 'spring-boot-onlinebanking'
+	version = '0.1.0'
 	sourceCompatibility = 1.8
 	
 	apply from: "${project.rootDir.absolutePath}/staticAnalysys.gradle"
@@ -30,6 +32,20 @@ allprojects {
 		maven { url "https://repo.spring.io/snapshot" }
 		maven { url "https://repo.spring.io/milestone" }
 	}
+	
+	task buildDocker(type: Docker, dependsOn: build) {
+	  push = project.hasProperty('push')
+	  tag = 'kumarabhishek0809/spring-boot-onlinebanking'
+	  applicationName = jar.baseName
+	  dockerfile = file('src/main/docker/Dockerfile')
+	  doFirst {
+	    copy {
+	      from jar
+	      into stageDir
+	    }
+	  }
+	}
+	
 
 
 	dependencies {

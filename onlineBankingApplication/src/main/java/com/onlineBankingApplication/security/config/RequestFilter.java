@@ -1,6 +1,7 @@
 package com.onlineBankingApplication.security.config;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,8 +17,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-//@Component
-//@Order(Ordered.HIGHEST_PRECEDENCE)
+@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class RequestFilter implements Filter {
 
 	@Override
@@ -31,6 +32,11 @@ public class RequestFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest httpRequest =   (HttpServletRequest)request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		
+		Enumeration<String> headerNames = httpRequest.getHeaderNames();
+		while(headerNames.hasMoreElements()){
+			System.out.println("Get From Header "+headerNames.nextElement());
+		}
 		
 		httpResponse.setHeader("Access-Control-Allow-Origin","http://localhost:4200");
 		httpResponse.setHeader("Access-Control-Allow-Methods","POST,PUT,GET,OPTIONS,DELETE");
