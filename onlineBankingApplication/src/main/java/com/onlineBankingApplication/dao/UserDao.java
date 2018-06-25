@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.onlineBankingApplication.domain.User;
+import com.onlineBankingApplication.entity.User;
 
 public interface UserDao extends CrudRepository<User, Long> {
 	User findByUsername(String username);

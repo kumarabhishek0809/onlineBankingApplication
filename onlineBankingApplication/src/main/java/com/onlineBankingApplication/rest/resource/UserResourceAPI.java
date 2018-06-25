@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.onlineBankingApplication.domain.PrimaryTransaction;
-import com.onlineBankingApplication.domain.SavingsTransaction;
-import com.onlineBankingApplication.domain.User;
+import com.onlineBankingApplication.entity.PrimaryTransaction;
+import com.onlineBankingApplication.entity.SavingsTransaction;
+import com.onlineBankingApplication.entity.User;
 import com.onlineBankingApplication.mq.rabbit.Producer;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;

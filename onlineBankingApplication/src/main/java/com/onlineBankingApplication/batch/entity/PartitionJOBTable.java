@@ -1,12 +1,23 @@
-package com.onlineBankingApplication.batch.partition;
+package com.onlineBankingApplication.batch.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class User {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class PartitionJOBTable {
+	@Id
+	@GeneratedValue
 	int id;
+	@Column(name = "username")
 	String username;
+	@Column(name = "password")
 	String password;
+	@Column(name = "age")
 	int age;
 
 	public int getId() {

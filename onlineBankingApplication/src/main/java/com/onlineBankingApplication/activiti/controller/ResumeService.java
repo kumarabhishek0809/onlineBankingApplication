@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onlineBankingApplication.constants.ApplicationConstants;
-import com.onlineBankingApplication.domain.Applicant;
+import com.onlineBankingApplication.entity.Applicant;
 import com.onlineBankingApplication.service.ApplicantService;
 
 @Component

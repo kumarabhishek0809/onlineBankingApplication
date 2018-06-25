@@ -15,17 +15,16 @@ import com.onlineBankingApplication.dao.PrimaryTransactionDao;
 import com.onlineBankingApplication.dao.RecipientDao;
 import com.onlineBankingApplication.dao.SavingAccountDao;
 import com.onlineBankingApplication.dao.SavingTransactionDao;
-import com.onlineBankingApplication.domain.PrimaryAccount;
-import com.onlineBankingApplication.domain.PrimaryTransaction;
-import com.onlineBankingApplication.domain.Recipient;
-import com.onlineBankingApplication.domain.SavingsAccount;
-import com.onlineBankingApplication.domain.SavingsTransaction;
-import com.onlineBankingApplication.domain.User;
+import com.onlineBankingApplication.entity.PrimaryAccount;
+import com.onlineBankingApplication.entity.PrimaryTransaction;
+import com.onlineBankingApplication.entity.Recipient;
+import com.onlineBankingApplication.entity.SavingsAccount;
+import com.onlineBankingApplication.entity.SavingsTransaction;
+import com.onlineBankingApplication.entity.User;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
-import com.onlineBankingApplication.service.sp.DataAccessRepository;
-import com.onlineBankingApplication.service.sp.Input;
-import com.onlineBankingApplication.service.sp.Result;
+import com.onlineBankingApplication.service.storedprocedure.sp.DataAccessRepository;
+import com.onlineBankingApplication.service.storedprocedure.sp.Result;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {

@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.onlineBankingApplication.dao.RoleDao;
-import com.onlineBankingApplication.domain.PrimaryAccount;
-import com.onlineBankingApplication.domain.SavingsAccount;
-import com.onlineBankingApplication.domain.User;
-import com.onlineBankingApplication.domain.UserRole;
+import com.onlineBankingApplication.entity.PrimaryAccount;
+import com.onlineBankingApplication.entity.SavingsAccount;
+import com.onlineBankingApplication.entity.User;
+import com.onlineBankingApplication.entity.UserRole;
 import com.onlineBankingApplication.service.UserService;
 
 @Controller

@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.service.sp.impl;
+package com.onlineBankingApplication.service.storedprocedure.sp.impl;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -11,8 +11,8 @@ import javax.persistence.StoredProcedureQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.onlineBankingApplication.service.sp.DataAccessRepository;
-import com.onlineBankingApplication.service.sp.Result;
+import com.onlineBankingApplication.service.storedprocedure.sp.DataAccessRepository;
+import com.onlineBankingApplication.service.storedprocedure.sp.Result;
 
 @Repository
 public class DataAccessRepositoryImpl implements DataAccessRepository{

@@ -1,10 +1,6 @@
 package com.onlineBankingApplication.batch.partition;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
+import com.onlineBankingApplication.batch.entity.User;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -24,9 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableBatchProcessing
@@ -110,8 +111,8 @@ public class PartitionerJob {
 	@Bean
 	@StepScope
 	public JdbcPagingItemReader<User> slaveReader(@Value("#{stepExecutionContext[fromId]}") final String fromId,
-			@Value("#{stepExecutionContext[toId]}") final String toId,
-			@Value("#{stepExecutionContext[name]}") final String name) {
+												  @Value("#{stepExecutionContext[toId]}") final String toId,
+												  @Value("#{stepExecutionContext[name]}") final String name) {
 		System.out.println("slaveReader start " + fromId + " " + toId);
 		JdbcPagingItemReader<User> reader = new JdbcPagingItemReader<>();
 		reader.setDataSource(dataSource);
@@ -156,6 +157,7 @@ public class PartitionerJob {
 	public FlatFileItemWriter<User> slaveWriter(@Value("#{stepExecutionContext[fromId]}") final String fromId,
 			@Value("#{stepExecutionContext[toId]}") final String toId) {
 		FlatFileItemWriter<User> reader = new FlatFileItemWriter<>();
+		//reader.setResource(new ClassPathResource("users.processed"));
 		reader.setResource(new FileSystemResource("csv/outputs/users.processed" + fromId + "-" + toId + ".csv"));
 		// reader.setAppendAllowed(false);
 		reader.setLineAggregator(new DelimitedLineAggregator<User>() {

@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.service.sp;
+package com.onlineBankingApplication.service.storedprocedure.sp;
 
 import java.math.BigInteger;
 

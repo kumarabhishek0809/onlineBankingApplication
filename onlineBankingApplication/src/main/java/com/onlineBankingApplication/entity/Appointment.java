@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.domain;
+package com.onlineBankingApplication.entity;
 
 import java.util.Date;
 

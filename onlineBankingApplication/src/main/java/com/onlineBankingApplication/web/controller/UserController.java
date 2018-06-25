@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.onlineBankingApplication.domain.User;
+import com.onlineBankingApplication.entity.User;
 import com.onlineBankingApplication.service.UserService;
 
 @Controller

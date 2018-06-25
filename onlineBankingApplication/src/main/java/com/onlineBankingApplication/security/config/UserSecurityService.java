@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.onlineBankingApplication.dao.UserDao;
-import com.onlineBankingApplication.domain.User;
+import com.onlineBankingApplication.entity.User;
 
 @Service
 public class UserSecurityService implements UserDetailsService {

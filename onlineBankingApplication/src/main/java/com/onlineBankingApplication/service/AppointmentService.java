@@ -1,6 +1,6 @@
 package com.onlineBankingApplication.service;
 
-import com.onlineBankingApplication.domain.Appointment;
+import com.onlineBankingApplication.entity.Appointment;
 
 public interface AppointmentService {
 

@@ -2,8 +2,8 @@ package com.onlineBankingApplication.service;
 
 import java.security.Principal;
 
-import com.onlineBankingApplication.domain.PrimaryAccount;
-import com.onlineBankingApplication.domain.SavingsAccount;
+import com.onlineBankingApplication.entity.PrimaryAccount;
+import com.onlineBankingApplication.entity.SavingsAccount;
 
 public interface AccountService {
 

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.onlineBankingApplication.domain.PrimaryAccount;
-import com.onlineBankingApplication.domain.Recipient;
-import com.onlineBankingApplication.domain.SavingsAccount;
-import com.onlineBankingApplication.domain.User;
+import com.onlineBankingApplication.entity.PrimaryAccount;
+import com.onlineBankingApplication.entity.Recipient;
+import com.onlineBankingApplication.entity.SavingsAccount;
+import com.onlineBankingApplication.entity.User;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
 

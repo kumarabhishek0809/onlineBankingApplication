@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.onlineBankingApplication.domain.Applicant;
+import com.onlineBankingApplication.entity.Applicant;
 
 public interface ApplicantDao extends CrudRepository<Applicant, Long>{
 

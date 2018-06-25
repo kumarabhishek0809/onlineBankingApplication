@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 import com.onlineBankingApplication.dao.RoleDao;
 import com.onlineBankingApplication.dao.UserDao;
-import com.onlineBankingApplication.domain.User;
-import com.onlineBankingApplication.domain.UserRole;
+import com.onlineBankingApplication.entity.User;
+import com.onlineBankingApplication.entity.UserRole;
 import com.onlineBankingApplication.security.config.UserSecurityService;
 import com.onlineBankingApplication.service.AccountService;
 import com.onlineBankingApplication.service.UserService;

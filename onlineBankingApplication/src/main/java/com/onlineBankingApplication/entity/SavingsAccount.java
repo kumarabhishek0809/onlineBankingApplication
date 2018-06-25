@@ -1,4 +1,4 @@
-package com.onlineBankingApplication.domain;
+package com.onlineBankingApplication.entity;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,17 +17,16 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class PrimaryAccount {
-
+public class SavingsAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private int accountNumber;
 	private BigDecimal accountBalance = new BigDecimal(0.0);
 
-	@OneToMany(mappedBy = "primaryAccount" , cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "savingAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
-	private List<PrimaryTransaction> primaryTransactions;
+	private List<SavingsTransaction> savingTransactions;
 
 	public Long getId() {
 		return id;
@@ -53,16 +52,17 @@ public class PrimaryAccount {
 		this.accountBalance = accountBalance;
 	}
 
-	public List<PrimaryTransaction> getPrimaryTransactions() {
-		return primaryTransactions;
+	public List<SavingsTransaction> getSavingTransactions() {
+		return savingTransactions;
 	}
 
-	public void setPrimaryTransactions(List<PrimaryTransaction> primaryTransactions) {
-		this.primaryTransactions = primaryTransactions;
+	public void setSavingTransactions(List<SavingsTransaction> savingTransactions) {
+		this.savingTransactions = savingTransactions;
 	}
 
 	@Override
 	public String toString() {
 		return new ReflectionToStringBuilder(this, new MultilineRecursiveToStringStyle()).toString();
 	}
+
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlineBankingApplication.dao.AppointmentDao;
-import com.onlineBankingApplication.domain.Appointment;
+import com.onlineBankingApplication.entity.Appointment;
 import com.onlineBankingApplication.service.AppointmentService;
 
 @Service

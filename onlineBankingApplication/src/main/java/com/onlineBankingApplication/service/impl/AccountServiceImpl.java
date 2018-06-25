@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.onlineBankingApplication.dao.PrimaryAccountDao;
 import com.onlineBankingApplication.dao.SavingAccountDao;
-import com.onlineBankingApplication.domain.PrimaryAccount;
-import com.onlineBankingApplication.domain.PrimaryTransaction;
-import com.onlineBankingApplication.domain.SavingsAccount;
-import com.onlineBankingApplication.domain.SavingsTransaction;
-import com.onlineBankingApplication.domain.User;
+import com.onlineBankingApplication.entity.PrimaryAccount;
+import com.onlineBankingApplication.entity.PrimaryTransaction;
+import com.onlineBankingApplication.entity.SavingsAccount;
+import com.onlineBankingApplication.entity.SavingsTransaction;
+import com.onlineBankingApplication.entity.User;
 import com.onlineBankingApplication.service.AccountService;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;

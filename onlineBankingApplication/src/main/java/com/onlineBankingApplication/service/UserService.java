@@ -3,8 +3,8 @@ package com.onlineBankingApplication.service;
 import java.util.List;
 import java.util.Set;
 
-import com.onlineBankingApplication.domain.User;
-import com.onlineBankingApplication.domain.UserRole;
+import com.onlineBankingApplication.entity.User;
+import com.onlineBankingApplication.entity.UserRole;
 
 public interface UserService {
 

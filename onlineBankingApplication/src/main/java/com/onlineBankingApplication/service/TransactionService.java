@@ -3,11 +3,11 @@ package com.onlineBankingApplication.service;
 import java.security.Principal;
 import java.util.List;
 
-import com.onlineBankingApplication.domain.PrimaryAccount;
-import com.onlineBankingApplication.domain.PrimaryTransaction;
-import com.onlineBankingApplication.domain.Recipient;
-import com.onlineBankingApplication.domain.SavingsAccount;
-import com.onlineBankingApplication.domain.SavingsTransaction;
+import com.onlineBankingApplication.entity.PrimaryAccount;
+import com.onlineBankingApplication.entity.PrimaryTransaction;
+import com.onlineBankingApplication.entity.Recipient;
+import com.onlineBankingApplication.entity.SavingsAccount;
+import com.onlineBankingApplication.entity.SavingsTransaction;
 
 public interface TransactionService {
 

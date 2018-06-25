@@ -1,5 +1,6 @@
 package com.onlineBankingApplication.batch.partition;
 
+import com.onlineBankingApplication.batch.entity.User;
 import org.springframework.batch.item.ItemProcessor;
 
 public class PersonItemPartitionProcessor implements ItemProcessor<User,User>{

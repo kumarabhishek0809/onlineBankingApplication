@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.onlineBankingApplication.batch.entity.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
@@ -30,7 +31,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 		if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
 			log.info("!!! JOB FINISHED! Time to verify the results");
 
-			List<Person> results = jdbcTemplate.query("SELECT first_name, last_name FROM people",
+			List<Person> results = jdbcTemplate.query("SELECT first_name, last_name FROM PERSON",
 					new RowMapper<Person>() {
 						@Override
 						public Person mapRow(ResultSet rs, int row) throws SQLException {
