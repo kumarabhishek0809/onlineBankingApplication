@@ -25,7 +25,7 @@ allprojects {
 	version = '0.1.0'
 	sourceCompatibility = 1.8
 	
-	apply from: "${project.rootDir.absolutePath}/staticAnalysys.gradle"
+	//apply from: "${project.rootDir.absolutePath}/staticAnalysys.gradle"
 	
 	repositories {
 		mavenCentral()
