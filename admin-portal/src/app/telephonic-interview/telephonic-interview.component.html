@@ -1,0 +1,26 @@
+<h1 appBetterHighlight> Telephonic Applicants Page </h1>
+<table id='applicant' class='table table-striped' cellspacing='0' width='100%'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Telephoic Selected</th>
+            <th>Telephoic Rejected</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let applicant of applicants">
+            <td>{{applicant.name}}</td>
+            <td>{{applicant.email}}</td>
+            <td>{{applicant.phoneNumber}}</td>
+            <td>
+                <a (click)='onSelectTelephonic(applicant)' style="cursor:pointer">
+                   Select Candidate</a>
+            </td>
+            <td>
+                <a (click)='onRejectTelephonic(applicant)' style="cursor:pointer">
+                   Reject Candidate</a>
+            </td>
+    </tbody>
+</table>

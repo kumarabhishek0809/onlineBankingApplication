@@ -1,0 +1,44 @@
+<nav class="navbar navbar-clean">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/login" routerLinkActive="active">Admin Portal</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li [style.display]="getDisplay()">
+                    <a [routerLink]="['/userAccount']" routerLinkActive="active">User Account<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li [style.display]="getDisplay()">
+                    <a [routerLink]="['/applicant']" routerLinkActive="active">Job Applicant (Activiti-Flow)<span class="sr-only">(current)</span></a>
+                </li>
+                <li [style.display]="getDisplay()">
+                    <a [routerLink]="['/appointment']" routerLinkActive="active">Appointment<span class="sr-only">(current)</span></a>
+                </li>
+                <li [style.display]="getDisplay()">
+                    <a [routerLink]="['/appointment/workappointment']" routerLinkActive="active">Appointment/Workappointment<span class="sr-only">(current)</span></a>
+                </li>
+                <li [style.display]="getDisplay()">
+                    <a [routerLink]="['/recipes']" routerLinkActive="active">Recipe<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li [style.display]="getDisplay()">
+                    <a [routerLink]="['/templateDrivenForm']" routerLinkActive="active">Template Driven Form<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li [style.display]="getDisplay()">
+                    <a [routerLink]="['/modelDrivenForm']" routerLinkActive="active">Model Driven Form<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--Nav bar collapse -->
+    </div>
+    <!-- Nav Bar Fluid -->
+</nav>

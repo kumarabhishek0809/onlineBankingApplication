@@ -1,0 +1,29 @@
+<h1>Primary Account Transaction List</h1>
+
+<table class="table table-striped">
+    <thead>
+        <th>Post Date </th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Amount</th>
+        <th>Available Balance</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let primaryTransaction of primaryTransactions">
+            <td>{{primaryTransaction.date | date : 'MM/dd/yyyy'}}</td>
+            <td>{{primaryTransaction.description}}</td>
+            <td>{{primaryTransaction.type}}</td>
+            <td>{{primaryTransaction.status}}</td>
+            <td>{{primaryTransaction.amount}}</td>
+            <td>{{primaryTransaction.availableBalance}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<p *ngIf="primaryTransactionExists; else noPrimaryTransactionExists">
+    Primary Transaction Exists.
+</p>
+<ng-template #noPrimaryTransactionExists>
+    No Primary Transaction Exists.
+</ng-template>
