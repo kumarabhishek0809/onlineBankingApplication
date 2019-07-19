@@ -1,92 +1,92 @@
 buildscript {
-	ext {
-		springBootVersion = '2.0.0.M4'
-	}
-	repositories {
-		mavenCentral()
-		maven { url "https://repo.spring.io/snapshot" }
-		maven { url "https://repo.spring.io/milestone" }
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath('se.transmode.gradle:gradle-docker:1.2')
-	}
+    ext {
+        springBootVersion = '2.0.0.M4'
+    }
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+    }
 }
 
 allprojects {
-	apply plugin: 'java'
-	apply plugin: 'eclipse'
-	apply plugin: 'org.springframework.boot'
-	apply plugin: 'io.spring.dependency-management' 
-	apply plugin: 'jacoco'
-	apply plugin: 'docker'
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'jacoco'
+    apply plugin: 'docker'
 
-	archivesBaseName = 'spring-boot-onlinebanking'
-	version = '0.1.0'
-	sourceCompatibility = 1.8
-	
-	//apply from: "${project.rootDir.absolutePath}/staticAnalysys.gradle"
-	
-	repositories {
-		mavenCentral()
-		maven { url "https://repo.spring.io/snapshot" }
-		maven { url "https://repo.spring.io/milestone" }
-	}
-	
-	task buildDocker(type: Docker, dependsOn: build) {
-	  push = project.hasProperty('push')
-	  tag = 'kumarabhishek0809/spring-boot-onlinebanking'
-	  applicationName = jar.baseName
-	  dockerfile = file('src/main/docker/Dockerfile')
-	  doFirst {
-	    copy {
-	      from jar
-	      into stageDir
-	    }
-	  }
-	}
-	
+    archivesBaseName = 'spring-boot-onlinebanking'
+    version = '0.1.0'
+    sourceCompatibility = 1.8
+
+    //apply from: "${project.rootDir.absolutePath}/staticAnalysys.gradle"
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+
+    task buildDocker(type: Docker, dependsOn: build) {
+        push = project.hasProperty('push')
+        tag = 'kumarabhishek0809/spring-boot-onlinebanking'
+        applicationName = jar.baseName
+        dockerfile = file('src/main/docker/Dockerfile')
+        doFirst {
+            copy {
+                from jar
+                into stageDir
+            }
+        }
+    }
 
 
-	dependencies {
-		compile('org.springframework.boot:spring-boot-starter-amqp')
-		compile('org.springframework.boot:spring-boot-starter-activemq')
-		compile('org.springframework.boot:spring-boot-starter-data-jpa')
-		compile('org.springframework.boot:spring-boot-starter-jdbc')
-		compile('org.springframework.boot:spring-boot-starter-security')
-		compile('org.springframework.boot:spring-boot-starter-web')
-	    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	    //Spring Batch
-	    compile('org.springframework.boot:spring-boot-starter-batch')
-	    /// Activiti BPM
-		compile('org.springframework.boot:spring-boot-starter-test')
-		compile('org.activiti:activiti-spring-boot-starter-basic:5.21.0')
-		compile('org.activiti:activiti-spring-boot-starter-rest-api:5.21.0')
-		compile('org.activiti:activiti-spring-boot-starter-actuator:5.21.0')
-		compile('org.activiti:activiti-spring-boot-starter-jpa:5.21.0')
-		compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+    dependencies {
+        compile('org.springframework.boot:spring-boot-starter-amqp')
+        compile('org.springframework.boot:spring-boot-starter-activemq')
+        compile('org.springframework.boot:spring-boot-starter-data-jpa')
+        compile('org.springframework.boot:spring-boot-starter-jdbc')
+        compile('org.springframework.boot:spring-boot-starter-security')
+        compile('org.springframework.boot:spring-boot-starter-web')
+        compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+        //Spring Batch
+        compile('org.springframework.boot:spring-boot-starter-batch')
+        /// Activiti BPM
+        compile('org.springframework.boot:spring-boot-starter-test')
+        compile('org.activiti:activiti-spring-boot-starter-basic:5.21.0')
+        compile('org.activiti:activiti-spring-boot-starter-rest-api:5.21.0')
+        compile('org.activiti:activiti-spring-boot-starter-actuator:5.21.0')
+        compile('org.activiti:activiti-spring-boot-starter-jpa:5.21.0')
+        compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+        //compile group: 'com.oracle.jdbc', name: 'ojdbc7', version: '12.2.0.1'
+        compile('org.subethamail:subethasmtp-wiser:1.2')
+        compile('org.springframework.boot:spring-boot-starter-batch')
+        compile('org.springframework.boot:spring-boot-starter-data-rest')
+        compile('org.springframework.data:spring-data-rest-hal-browser')
+        compile('org.springframework.boot:spring-boot-starter-integration')
 
-		compile('org.subethamail:subethasmtp-wiser:1.2')
-		compile('org.springframework.boot:spring-boot-starter-batch')
-		compile('org.springframework.boot:spring-boot-starter-data-rest')
-		compile('org.springframework.data:spring-data-rest-hal-browser')
-		compile('org.springframework.boot:spring-boot-starter-integration')
-	    
-	    //for Rabbit
-		compile('org.springframework.amqp:spring-rabbit')
-		
-		//for JMS
-		compile('org.springframework:spring-jms')
-		//for Spring Integration.
-		compile('org.springframework.integration:spring-integration-jms')
-		compile('org.apache.activemq:activemq-broker')
-	    compile('org.apache.activemq:activemq-client')
-	    //Apache Utils.
-		compile('org.apache.commons:commons-lang3:3.5')
-		compile('commons-io:commons-io:2.5');
-		//For DataBase
-		compile('mysql:mysql-connector-java:6.0.5')
-		runtime('mysql:mysql-connector-java')
-		testCompile('org.springframework.boot:spring-boot-starter-test')
-	}
+        //for Rabbit
+        compile('org.springframework.amqp:spring-rabbit')
+
+        //for JMS
+        compile('org.springframework:spring-jms')
+        //for Spring Integration.
+        compile('org.springframework.integration:spring-integration-jms')
+        compile('org.apache.activemq:activemq-broker')
+        compile('org.apache.activemq:activemq-client')
+        //Apache Utils.
+        compile('org.apache.commons:commons-lang3:3.5')
+        compile('commons-io:commons-io:2.5')
+        //For DataBase
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
 }
