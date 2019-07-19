@@ -40,7 +40,7 @@ public class AppointmentController {
 			@ModelAttribute("dateString")String dateString , Principal principal) throws ParseException{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		Date date = format.parse(dateString);
-		appointment.setDate(date);
+		appointment.setAppointmentDate(date);
 		
 		User user = userService.findByUserName(principal.getName());
 		appointment.setUser(user);

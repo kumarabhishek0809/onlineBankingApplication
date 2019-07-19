@@ -18,7 +18,7 @@ public class SavingsTransaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private Date date;
+	private Date savingTransactionDates;
 	private String description;
 	private String type;
 	private String status;
@@ -32,10 +32,10 @@ public class SavingsTransaction {
 
 	}
 
-	public SavingsTransaction(Date date, String description, String type, String status, double amount,
-			BigDecimal availableBalance, SavingsAccount savingAccount) {
+	public SavingsTransaction(Date savingTransactionDates, String description, String type, String status, double amount,
+							  BigDecimal availableBalance, SavingsAccount savingAccount) {
 		super();
-		this.date = date;
+		this.savingTransactionDates = savingTransactionDates;
 		this.description = description;
 		this.type = type;
 		this.status = status;
@@ -44,12 +44,12 @@ public class SavingsTransaction {
 		this.savingAccount = savingAccount;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getSavingTransactionDates() {
+		return savingTransactionDates;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setSavingTransactionDates(Date savingTransactionDates) {
+		this.savingTransactionDates = savingTransactionDates;
 	}
 
 	public String getDescription() {

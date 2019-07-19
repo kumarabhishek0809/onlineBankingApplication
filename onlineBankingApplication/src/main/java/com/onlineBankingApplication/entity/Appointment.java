@@ -17,7 +17,7 @@ public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private Date date;
+	private Date appointmentDate;
 	private String location;
 	private String description;
 	private boolean confirmed;
@@ -35,12 +35,12 @@ public class Appointment {
 		this.id = id;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getAppointmentDate() {
+		return appointmentDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setAppointmentDate(Date appointmentDate) {
+		this.appointmentDate = appointmentDate;
 	}
 
 	public String getLocation() {

@@ -18,7 +18,7 @@ public class PrimaryTransaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private Date date;
+	private Date primaryTransactionDate;
 	private String description;
 	private String type;
 	private String status;
@@ -29,10 +29,10 @@ public class PrimaryTransaction {
 	@JoinColumn(name = "primary_account_id")
 	private PrimaryAccount primaryAccount;
 
-	public PrimaryTransaction(Date date, String description, String type, String status, double amount,
-			BigDecimal availableBalance, PrimaryAccount primaryAccount) {
+	public PrimaryTransaction(Date primaryTransactionDate, String description, String type, String status, double amount,
+							  BigDecimal availableBalance, PrimaryAccount primaryAccount) {
 		super();
-		this.date = date;
+		this.primaryTransactionDate = primaryTransactionDate;
 		this.description = description;
 		this.type = type;
 		this.status = status;
@@ -45,12 +45,12 @@ public class PrimaryTransaction {
 
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getPrimaryTransactionDate() {
+		return primaryTransactionDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setPrimaryTransactionDate(Date primaryTransactionDate) {
+		this.primaryTransactionDate = primaryTransactionDate;
 	}
 
 	public String getDescription() {
