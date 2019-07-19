@@ -71,7 +71,8 @@ allprojects {
         compile('org.activiti:activiti-spring-boot-starter-actuator:5.21.0')
         compile('org.activiti:activiti-spring-boot-starter-jpa:5.21.0')
         compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
-        //compile group: 'com.oracle.jdbc', name: 'ojdbc7', version: '12.2.0.1'
+        compile('com.oracle.jdbc:ojdbc7:12.2.0.1')
+        runtime('com.oracle.jdbc:ojdbc7:12.2.0.1')
         compile('org.subethamail:subethasmtp-wiser:1.2')
         compile('org.springframework.boot:spring-boot-starter-batch')
         compile('org.springframework.boot:spring-boot-starter-data-rest')

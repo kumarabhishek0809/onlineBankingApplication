@@ -32,3 +32,14 @@ docker run -p 3306:3306 -e mysql_allow_empu=yes -d mysql
 
 Create database OnlineBanking;
 
+
+docker run -d -it --rm --name oracle12se store/oracle/database-enterprise:12.2.0.1
+docker logs oracle12se --tail 100
+docker inspect oracle12se | grep IPAddress
+docker run -d -it --rm --name oracle12se -p 1521:1521 -p 5500:5500 store/oracle/database-enterprise:12.2.0.1
+
+docker exec -it oracle12se bash -c "source /home/oracle/.bashrc; sqlplus /nolog"
+alter session set "_ORACLE_SCRIPT"=true;
+
+
+
