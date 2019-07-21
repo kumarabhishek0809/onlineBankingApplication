@@ -13,6 +13,10 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+*.class
+*.projects
+*.prefs
+*.project
 
 # Windows shortcuts
 *.lnk
@@ -48,3 +52,5 @@ Temporary Items
 /.gradle/
 /bin/
 /build/
+//./classes/
+
