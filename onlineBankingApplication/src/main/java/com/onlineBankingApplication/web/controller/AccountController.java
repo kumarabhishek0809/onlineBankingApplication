@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.onlineBankingApplication.entity.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.onlineBankingApplication.entity.User;
 import com.onlineBankingApplication.mq.rabbit.Producer;
 import com.onlineBankingApplication.service.AccountService;
 import com.onlineBankingApplication.service.TransactionService;
@@ -34,16 +34,16 @@ public class AccountController {
 	@Autowired
 	private Producer messageServices;
 	
-	@Value("${spring.rabbit.amqp.exchange}")
+	//@Value("${spring.rabbit.amqp.exchange}")
 	private String onlineRabbitMessageExchange;
 	
-	@Value("${spring.rabbit.amqp.queue}")
+	//@Value("${spring.rabbit.amqp.queue}")
 	private String onlineRabbitMessageQueue;
 
 	@RequestMapping("/primaryAccount")
 	public String primaryAccount(Model model, Principal principal) {
-		User user = userService.findByUserName(principal.getName());
-		model.addAttribute("primaryAccount", user.getPrimaryAccount());
+		UserDetails userDetails = userService.findByUserName(principal.getName());
+		model.addAttribute("primaryAccount", userDetails.getPrimaryAccount());
 		model.addAttribute("primaryTransactionList",
 				transactionService.findPrimaryTransactionList(principal.getName()));
 		return "primaryAccount";
@@ -51,8 +51,8 @@ public class AccountController {
 
 	@RequestMapping("/savingsAccount")
 	public String savingsAccount(Model model, Principal principal) {
-		User user = userService.findByUserName(principal.getName());
-		model.addAttribute("savingsAccount", user.getSavingsAccount());
+		UserDetails userDetails = userService.findByUserName(principal.getName());
+		model.addAttribute("savingsAccount", userDetails.getSavingsAccount());
 		model.addAttribute("savingsTransactionList",
 				transactionService.findSavingsTransactionList(principal.getName()));
 		return "savingsAccount";

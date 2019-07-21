@@ -38,7 +38,7 @@ public class SpringActivitiConfig {
 //                group.setType("security-role");
 //                identityService.saveGroup(group);
 //
-//                User admin = identityService.newUser("admin");
+//                UserDetailsData admin = identityService.newUser("admin");
 //                admin.setPassword("admin");
 //                identityService.saveUser(admin);
 

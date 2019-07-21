@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.onlineBankingApplication.entity.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.onlineBankingApplication.entity.PrimaryTransaction;
 import com.onlineBankingApplication.entity.SavingsTransaction;
-import com.onlineBankingApplication.entity.User;
 import com.onlineBankingApplication.mq.rabbit.Producer;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
@@ -33,14 +33,14 @@ public class UserResourceAPI {
 	@Autowired
 	private Producer messageServices;
 	
-	@Value("${spring.rabbit.amqp.exchange}")
+	//@Value("${spring.rabbit.amqp.exchange}")
 	private String onlineRabbitMessageExchange;
 	
-	@Value("${spring.rabbit.amqp.queue}")
+	//@Value("${spring.rabbit.amqp.queue}")
 	private String onlineRabbitMessageQueue;
 	
 	@RequestMapping(value = "/user/all", method = RequestMethod.GET , produces = "application/json")
-	public List<User> userList(){
+	public List<UserDetails> userList(){
 		return userService.findUserList();
 	}
 	

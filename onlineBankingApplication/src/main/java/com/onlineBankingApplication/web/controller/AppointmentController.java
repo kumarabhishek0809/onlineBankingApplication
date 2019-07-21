@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.onlineBankingApplication.entity.Appointment;
-import com.onlineBankingApplication.entity.User;
+import com.onlineBankingApplication.entity.UserDetails;
 import com.onlineBankingApplication.service.AppointmentService;
 import com.onlineBankingApplication.service.UserService;
 
@@ -42,8 +42,8 @@ public class AppointmentController {
 		Date date = format.parse(dateString);
 		appointment.setAppointmentDate(date);
 		
-		User user = userService.findByUserName(principal.getName());
-		appointment.setUser(user);
+		UserDetails userDetails = userService.findByUserName(principal.getName());
+		appointment.setUserDetails(userDetails);
 		
 		appointmentService.createAppointment(appointment);
 		

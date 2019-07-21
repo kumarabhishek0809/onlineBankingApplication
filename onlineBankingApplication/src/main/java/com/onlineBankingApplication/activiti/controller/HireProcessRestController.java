@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.onlineBankingApplication.constants.ApplicationConstants;
 import com.onlineBankingApplication.entity.Applicant;
-import com.onlineBankingApplication.entity.User;
+import com.onlineBankingApplication.entity.UserDetails;
 import com.onlineBankingApplication.service.ApplicantService;
 import com.onlineBankingApplication.service.UserService;
 
@@ -45,7 +45,7 @@ public class HireProcessRestController {
 	private ApplicantService applicantService;
 
 	@RequestMapping(value = "/user/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<User> userList() {
+	public List<UserDetails> userList() {
 		return userService.findUserList();
 	}
 

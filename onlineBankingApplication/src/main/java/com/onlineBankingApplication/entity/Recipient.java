@@ -26,7 +26,7 @@ public class Recipient {
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
+	private UserDetails userDetails;
 
 	public Long getId() {
 		return id;
@@ -76,12 +76,12 @@ public class Recipient {
 		this.description = description;
 	}
 
-	public User getUser() {
-		return user;
+	public UserDetails getUserDetails() {
+		return userDetails;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
 	}
 
 	@Override

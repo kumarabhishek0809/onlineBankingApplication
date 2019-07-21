@@ -3,6 +3,7 @@ package com.onlineBankingApplication.web.controller;
 import java.security.Principal;
 import java.util.List;
 
+import com.onlineBankingApplication.entity.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.onlineBankingApplication.entity.PrimaryAccount;
 import com.onlineBankingApplication.entity.Recipient;
 import com.onlineBankingApplication.entity.SavingsAccount;
-import com.onlineBankingApplication.entity.User;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
 
@@ -41,9 +41,9 @@ public class TransferController {
 	public String betweenAccountsPost(@ModelAttribute("transferFrom") String transferFrom,
 			@ModelAttribute("transferTo") String transferTo, @ModelAttribute("amount") String amount,
 			Principal principal) throws Exception {
-		User user = userService.findByUserName(principal.getName());
-		PrimaryAccount primaryAccount = user.getPrimaryAccount();
-		SavingsAccount savingAccount = user.getSavingsAccount();
+		UserDetails userDetails = userService.findByUserName(principal.getName());
+		PrimaryAccount primaryAccount = userDetails.getPrimaryAccount();
+		SavingsAccount savingAccount = userDetails.getSavingsAccount();
 		transactionService.betweenAccountsTransafer(transferFrom, transferTo, amount, primaryAccount, savingAccount,principal);
 
 		return "redirect:/userFront";
@@ -65,8 +65,8 @@ public class TransferController {
 	
 	@RequestMapping(value = "/recipient/save" , method = RequestMethod.POST)
 	public String recipientPost(@ModelAttribute("recipient") Recipient recipient,Principal principal){
-		User user = userService.findByUserName(principal.getName());
-		recipient.setUser(user);
+		UserDetails userDetails = userService.findByUserName(principal.getName());
+		recipient.setUserDetails(userDetails);
 		transactionService.saveRecipient(recipient);
 		return "redirect:/transfer/recipient";
 	}
@@ -105,9 +105,9 @@ public class TransferController {
 	@RequestMapping(value = "/toSomeoneElse" , method = RequestMethod.POST)
 	public String toSomeoneElsePost(@ModelAttribute("recipientName") String recipientName,
 			@ModelAttribute("accountType") String accountType,@ModelAttribute("amount") String amount,Principal principal){
-		User user = userService.findByUserName(principal.getName());
+		UserDetails userDetails = userService.findByUserName(principal.getName());
 		Recipient recipient = transactionService.findRecipientByName(recipientName);
-		transactionService.toSomeoneElseTransfer(recipient,accountType,amount,user.getPrimaryAccount(),user.getSavingsAccount());
+		transactionService.toSomeoneElseTransfer(recipient,accountType,amount, userDetails.getPrimaryAccount(), userDetails.getSavingsAccount());
 		
 		return "redirect:/userFront";
 		

@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.onlineBankingApplication.entity.UserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.onlineBankingApplication.dao.RoleDao;
 import com.onlineBankingApplication.entity.PrimaryAccount;
 import com.onlineBankingApplication.entity.SavingsAccount;
-import com.onlineBankingApplication.entity.User;
 import com.onlineBankingApplication.entity.UserRole;
 import com.onlineBankingApplication.service.UserService;
 
@@ -42,25 +42,25 @@ public class HomeController {
 
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
 	public String signUp(Model model) {
-		User user = new User();
-		model.addAttribute("user", user);
+		UserDetails userDetails = new UserDetails();
+		model.addAttribute("user", userDetails);
 		return "signUp";
 	}
 
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
-	public String signUpPost(@ModelAttribute("user") User user, Model model) {
-		if (userService.checkUserExists(user.getUsername(), user.getEmail())) {
-			if (userService.checkEmailExists(user.getEmail())) {
+	public String signUpPost(@ModelAttribute("user") UserDetails userDetails, Model model) {
+		if (userService.checkUserExists(userDetails.getUsername(), userDetails.getEmail())) {
+			if (userService.checkEmailExists(userDetails.getEmail())) {
 				model.addAttribute("emailExists", true);
 			}
-			if (userService.checkUserNameExists(user.getUsername())) {
+			if (userService.checkUserNameExists(userDetails.getUsername())) {
 				model.addAttribute("usernameExits", true);
 			}
 			return "signUp";
 		} else {
 			Set<UserRole> userRoles = new HashSet<>();
-			userRoles.add(new UserRole(user, roleDao.findByName("ROLE_USER")));
-			userService.createUser(user, userRoles);
+			userRoles.add(new UserRole(userDetails, roleDao.findByName("ROLE_USER")));
+			userService.createUser(userDetails, userRoles);
 			return "redirect:/";
 		}
 
@@ -68,9 +68,9 @@ public class HomeController {
 
 	@RequestMapping("/userFront")
 	public String userFront(Principal principal, Model model) {
-		User user = userService.findByUserName(principal.getName());
-		PrimaryAccount primaryAccount = user.getPrimaryAccount();
-		SavingsAccount savingAccount = user.getSavingsAccount();
+		UserDetails userDetails = userService.findByUserName(principal.getName());
+		PrimaryAccount primaryAccount = userDetails.getPrimaryAccount();
+		SavingsAccount savingAccount = userDetails.getSavingsAccount();
 
 		model.addAttribute("primaryAccount", primaryAccount);
 		model.addAttribute("savingsAccount", savingAccount);

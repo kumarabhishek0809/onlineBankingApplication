@@ -1,6 +1,6 @@
 package com.onlineBankingApplication.batch.partition;
 
-import com.onlineBankingApplication.batch.entity.User;
+import com.onlineBankingApplication.batch.entity.UserDetailsData;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -82,7 +81,7 @@ public class PartitionerJob {
 	@Bean(name = "slave")
 	public Step slave() {
 		System.out.println("...........called slave .........");
-		return stepBuilderFactory.get("slave").<User, User>chunk(100)
+		return stepBuilderFactory.get("slave").<UserDetailsData, UserDetailsData>chunk(100)
 				.reader(slaveReader(null, null, null))
 				.processor(slaveProcessor(null))
 				.writer(slaveWriter(null, null))
@@ -110,11 +109,11 @@ public class PartitionerJob {
 
 	@Bean
 	@StepScope
-	public JdbcPagingItemReader<User> slaveReader(@Value("#{stepExecutionContext[fromId]}") final String fromId,
-												  @Value("#{stepExecutionContext[toId]}") final String toId,
-												  @Value("#{stepExecutionContext[name]}") final String name) {
+	public JdbcPagingItemReader<UserDetailsData> slaveReader(@Value("#{stepExecutionContext[fromId]}") final String fromId,
+                                                             @Value("#{stepExecutionContext[toId]}") final String toId,
+                                                             @Value("#{stepExecutionContext[name]}") final String name) {
 		System.out.println("slaveReader start " + fromId + " " + toId);
-		JdbcPagingItemReader<User> reader = new JdbcPagingItemReader<>();
+		JdbcPagingItemReader<UserDetailsData> reader = new JdbcPagingItemReader<>();
 		reader.setDataSource(dataSource);
 		reader.setQueryProvider(queryProvider());
 		Map<String, Object> parameterValues = new HashMap<>();
@@ -123,9 +122,9 @@ public class PartitionerJob {
 		System.out.println("Parameter Value " + name + " " + parameterValues);
 		reader.setParameterValues(parameterValues);
 		reader.setPageSize(1000);
-		reader.setRowMapper(new BeanPropertyRowMapper<User>() {
+		reader.setRowMapper(new BeanPropertyRowMapper<UserDetailsData>() {
 			{
-				setMappedClass(User.class);
+				setMappedClass(UserDetailsData.class);
 			}
 		});
 		System.out.println("slaveReader end " + fromId + " " + toId);
@@ -154,16 +153,16 @@ public class PartitionerJob {
 
 	@Bean
 	@StepScope
-	public FlatFileItemWriter<User> slaveWriter(@Value("#{stepExecutionContext[fromId]}") final String fromId,
-			@Value("#{stepExecutionContext[toId]}") final String toId) {
-		FlatFileItemWriter<User> reader = new FlatFileItemWriter<>();
+	public FlatFileItemWriter<UserDetailsData> slaveWriter(@Value("#{stepExecutionContext[fromId]}") final String fromId,
+                                                           @Value("#{stepExecutionContext[toId]}") final String toId) {
+		FlatFileItemWriter<UserDetailsData> reader = new FlatFileItemWriter<>();
 		//reader.setResource(new ClassPathResource("users.processed"));
 		reader.setResource(new FileSystemResource("csv/outputs/users.processed" + fromId + "-" + toId + ".csv"));
 		// reader.setAppendAllowed(false);
-		reader.setLineAggregator(new DelimitedLineAggregator<User>() {
+		reader.setLineAggregator(new DelimitedLineAggregator<UserDetailsData>() {
 			{
 				setDelimiter(",");
-				setFieldExtractor(new BeanWrapperFieldExtractor<User>() {
+				setFieldExtractor(new BeanWrapperFieldExtractor<UserDetailsData>() {
 					{
 						setNames(new String[] { "id", "username", "password", "age" });
 					}

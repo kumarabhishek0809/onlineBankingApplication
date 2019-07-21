@@ -24,8 +24,8 @@ public class Appointment {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	// Join column is the Column in Appointment table which is Foreign Key and primary key in User.
-	private User user;
+	// Join column is the Column in Appointment table which is Foreign Key and primary key in UserDetailsData.
+	private UserDetails userDetails;
 
 	public Long getId() {
 		return id;
@@ -67,12 +67,12 @@ public class Appointment {
 		this.confirmed = confirmed;
 	}
 
-	public User getUser() {
-		return user;
+	public UserDetails getUserDetails() {
+		return userDetails;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
 	}
 
 	@Override

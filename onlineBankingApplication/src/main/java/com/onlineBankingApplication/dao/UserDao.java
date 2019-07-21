@@ -2,12 +2,11 @@ package com.onlineBankingApplication.dao;
 
 import java.util.List;
 
+import com.onlineBankingApplication.entity.UserDetails;
 import org.springframework.data.repository.CrudRepository;
 
-import com.onlineBankingApplication.entity.User;
-
-public interface UserDao extends CrudRepository<User, Long> {
-	User findByUsername(String username);
-	User findByEmail(String email);
-	List<User> findAll();
+public interface UserDao extends CrudRepository<UserDetails, Long> {
+	UserDetails findByUsername(String username);
+	UserDetails findByEmail(String email);
+	List<UserDetails> findAll();
 }

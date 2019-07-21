@@ -20,9 +20,9 @@
 							Name</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user fa"
+								<span class="input-group-addon"><i class="fa fa-userDetails fa"
 									aria-hidden="true"></i></span> <input type="text" class="form-control"
-									th:value="${user.firstName}" id="firstName" name="firstName"
+									th:value="${userDetails.firstName}" id="firstName" name="firstName"
 									roleId="firstname" placeholder="Enter your first name"
 									required="required" />
 							</div>
@@ -34,9 +34,9 @@
 							Name</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user fa"
+								<span class="input-group-addon"><i class="fa fa-userDetails fa"
 									aria-hidden="true"></i></span> <input type="text" class="form-control"
-									th:value="${user.lastName}" id="lastName" name="lastName"
+									th:value="${userDetails.lastName}" id="lastName" name="lastName"
 									roleId="lastName" placeholder="Enter your last name"
 									required="required" />
 							</div>
@@ -49,7 +49,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-phone fa"
 									aria-hidden="true"></i></span> <input type="text" class="form-control"
-									th:value="${user.phone}" id="phone" name="phone" roleId="phone"
+									th:value="${userDetails.phone}" id="phone" name="phone" roleId="phone"
 									placeholder="xxx-xxx-xxxx" required="required" />
 							</div>
 						</div>
@@ -63,7 +63,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="fa fa-envelope fa" aria-hidden="true"></i></span> <input
-									type="text" class="form-control" th:value="${user.email}"
+									type="text" class="form-control" th:value="${userDetails.email}"
 									id="email" name="email" roleId="email"
 									placeholder="Enter your Email" required="required" />
 							</div>
@@ -78,7 +78,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-users fa"
 									aria-hidden="true"></i></span> <input type="text" class="form-control"
-									th:value="${user.username}" id="username" name="username"
+									th:value="${userDetails.username}" id="username" name="username"
 									roleId="username" placeholder="Enter your Username"
 									required="required" />
 							</div>
@@ -92,7 +92,7 @@
 								<span class="input-group-addon"><i
 									class="fa fa-lock fa-lg" aria-hidden="true"></i></span> <input
 									type="password" class="form-control"
-									th:value="${user.password}" id="password" name="password"
+									th:value="${userDetails.password}" id="password" name="password"
 									roleId="password" placeholder="Enter your Password"
 									required="required" />
 							</div>

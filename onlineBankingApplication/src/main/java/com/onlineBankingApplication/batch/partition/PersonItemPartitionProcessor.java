@@ -1,9 +1,9 @@
 package com.onlineBankingApplication.batch.partition;
 
-import com.onlineBankingApplication.batch.entity.User;
+import com.onlineBankingApplication.batch.entity.UserDetailsData;
 import org.springframework.batch.item.ItemProcessor;
 
-public class PersonItemPartitionProcessor implements ItemProcessor<User,User>{
+public class PersonItemPartitionProcessor implements ItemProcessor<UserDetailsData, UserDetailsData>{
 	private String threadName;
 	 
 	  public String getThreadName() {
@@ -15,7 +15,7 @@ public class PersonItemPartitionProcessor implements ItemProcessor<User,User>{
 	  }
 	 
 	  @Override
-	  public User process(User person) throws Exception {
+	  public UserDetailsData process(UserDetailsData person) throws Exception {
 	    System.out.println(threadName + " processing : "+person);
 	    return person;
 	  }

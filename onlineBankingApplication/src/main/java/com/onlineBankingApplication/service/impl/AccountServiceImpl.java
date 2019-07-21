@@ -4,16 +4,13 @@ import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.Date;
 
+import com.onlineBankingApplication.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlineBankingApplication.dao.PrimaryAccountDao;
 import com.onlineBankingApplication.dao.SavingAccountDao;
-import com.onlineBankingApplication.entity.PrimaryAccount;
-import com.onlineBankingApplication.entity.PrimaryTransaction;
-import com.onlineBankingApplication.entity.SavingsAccount;
-import com.onlineBankingApplication.entity.SavingsTransaction;
-import com.onlineBankingApplication.entity.User;
+import com.onlineBankingApplication.entity.UserDetails;
 import com.onlineBankingApplication.service.AccountService;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
@@ -64,9 +61,9 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void deposit(String accountType, double parseDouble, Principal principal) {
-		User user = userService.findByUserName(principal.getName());
+		UserDetails userDetails = userService.findByUserName(principal.getName());
 		if (PRIMARY.equalsIgnoreCase(accountType)) {
-			PrimaryAccount primaryAccount = user.getPrimaryAccount();
+			PrimaryAccount primaryAccount = userDetails.getPrimaryAccount();
 			primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().add(new BigDecimal(parseDouble)));
 			primaryAccountDao.save(primaryAccount);
 
@@ -75,7 +72,7 @@ public class AccountServiceImpl implements AccountService {
 			transactionService.savePrimaryDepositTransaction(primaryTransaction);
 
 		} else if (SAVINGS.equalsIgnoreCase(accountType)) {
-			SavingsAccount savingAccount = user.getSavingsAccount();
+			SavingsAccount savingAccount = userDetails.getSavingsAccount();
 			savingAccount.setAccountBalance(savingAccount.getAccountBalance().add(new BigDecimal(parseDouble)));
 			savingAccountDao.save(savingAccount);
 
@@ -88,9 +85,9 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void withdraw(String accountType, double parseDouble, Principal principal) {
-		User user = userService.findByUserName(principal.getName());
+		UserDetails userDetails = userService.findByUserName(principal.getName());
 		if (PRIMARY.equalsIgnoreCase(accountType)) {
-			PrimaryAccount primaryAccount = user.getPrimaryAccount();
+			PrimaryAccount primaryAccount = userDetails.getPrimaryAccount();
 			primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(parseDouble)));
 			primaryAccountDao.save(primaryAccount);
 
@@ -99,7 +96,7 @@ public class AccountServiceImpl implements AccountService {
 			transactionService.savePrimaryWithdrawTransaction(primaryTransaction);
 
 		} else if (SAVINGS.equalsIgnoreCase(accountType)) {
-			SavingsAccount savingAccount = user.getSavingsAccount();
+			SavingsAccount savingAccount = userDetails.getSavingsAccount();
 			savingAccount.setAccountBalance(savingAccount.getAccountBalance().subtract(new BigDecimal(parseDouble)));
 			savingAccountDao.save(savingAccount);
 

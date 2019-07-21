@@ -21,14 +21,14 @@ public class UserRole {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userRoleId;
 	
-	public UserRole(User user,Role role){
-		this.user = user;
+	public UserRole(UserDetails userDetails, Role role){
+		this.userDetails = userDetails;
 		this.role = role;
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
-	private User user;
+	private UserDetails userDetails;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "role_id")
@@ -42,12 +42,12 @@ public class UserRole {
 		this.userRoleId = userRoleId;
 	}
 
-	public User getUser() {
-		return user;
+	public UserDetails getUserDetails() {
+		return userDetails;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
 	}
 
 	public Role getRole() {

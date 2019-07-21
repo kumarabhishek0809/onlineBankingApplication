@@ -1,15 +1,14 @@
 package com.onlineBankingApplication.security.config;
 
+import com.onlineBankingApplication.entity.UserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.onlineBankingApplication.dao.UserDao;
-import com.onlineBankingApplication.entity.User;
 
 @Service
 public class UserSecurityService implements UserDetailsService {
@@ -20,13 +19,13 @@ public class UserSecurityService implements UserDetailsService {
 	private UserDao userDao;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userDao.findByUsername(username);
-		if(null == user){
+	public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		UserDetails userDetails = userDao.findByUsername(username);
+		if(null == userDetails){
 			LOG.warn("Username {} not found ",username);
 			throw new UsernameNotFoundException("Username "+username+" not Found");
 		}
-		return user;
+		return userDetails;
 	}
 
 }

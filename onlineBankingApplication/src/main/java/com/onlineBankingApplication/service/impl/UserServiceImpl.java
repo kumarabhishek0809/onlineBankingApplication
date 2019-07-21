@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.onlineBankingApplication.dao.RoleDao;
 import com.onlineBankingApplication.dao.UserDao;
-import com.onlineBankingApplication.entity.User;
+import com.onlineBankingApplication.entity.UserDetails;
 import com.onlineBankingApplication.entity.UserRole;
 import com.onlineBankingApplication.security.config.UserSecurityService;
 import com.onlineBankingApplication.service.AccountService;
@@ -38,17 +38,17 @@ public class UserServiceImpl implements UserService {
 	private AccountService accountService;
 
 	@Override
-	public void save(User user) {
-		userDao.save(user);
+	public void save(UserDetails userDetails) {
+		userDao.save(userDetails);
 	}
 
 	@Override
-	public User findByUserName(String username) {
+	public UserDetails findByUserName(String username) {
 		return userDao.findByUsername(username);
 	}
 
 	@Override
-	public User findByEmail(String email) {
+	public UserDetails findByEmail(String email) {
 		return userDao.findByEmail(email);
 	}
 
@@ -78,43 +78,43 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User createUser(User user, Set<UserRole> userRoles) {
-		User localUser = userDao.findByUsername(user.getUsername());
-		if (localUser != null) {
-			LOG.info("User with username {} already Exists", user.getUsername());
+	public UserDetails createUser(UserDetails userDetails, Set<UserRole> userRoles) {
+		UserDetails localUserDetails = userDao.findByUsername(userDetails.getUsername());
+		if (localUserDetails != null) {
+			LOG.info("UserDetailsData with username {} already Exists", userDetails.getUsername());
 		} else {
-			String encryptedPassword = passwordEncoder.encode(user.getPassword());
+			String encryptedPassword = passwordEncoder.encode(userDetails.getPassword());
 			for (UserRole userRole : userRoles) {
 				roleDao.save(userRole.getRole());
-				user.getUserRoles().addAll(userRoles);
-				user.setPassword(encryptedPassword);
-				user.setPrimaryAccount(accountService.createPrimaryAccount());
-				user.setSavingAccount(accountService.createSavingAccount());
-				user.setUsername(user.getUsername());
-				localUser = userDao.save(user);
+				userDetails.getUserRoles().addAll(userRoles);
+				userDetails.setPassword(encryptedPassword);
+				userDetails.setPrimaryAccount(accountService.createPrimaryAccount());
+				userDetails.setSavingAccount(accountService.createSavingAccount());
+				userDetails.setUsername(userDetails.getUsername());
+				localUserDetails = userDao.save(userDetails);
 			}
 		}
-		return localUser;
+		return localUserDetails;
 	}
 
 	@Override
-	public List<User> findUserList() {
+	public List<UserDetails> findUserList() {
 		return StreamSupport.stream(userDao.findAll().spliterator(), true).collect(Collectors.toList());
 
 	}
 
 	@Override
 	public void enableUser(String username) {
-		User user = findByUserName(username);
-		user.setEnabled(true);
-		userDao.save(user);
+		UserDetails userDetails = findByUserName(username);
+		userDetails.setEnabled(true);
+		userDao.save(userDetails);
 	}
 
 	@Override
 	public void disableUser(String username) {
-		User user = findByUserName(username);
-		user.setEnabled(false);
-		userDao.save(user);
+		UserDetails userDetails = findByUserName(username);
+		userDetails.setEnabled(false);
+		userDao.save(userDetails);
 
 	}
 

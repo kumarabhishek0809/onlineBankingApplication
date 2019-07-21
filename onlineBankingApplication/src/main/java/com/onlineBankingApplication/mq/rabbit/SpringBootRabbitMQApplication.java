@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class SpringBootRabbitMQApplication {
 
-	@Value("${spring.rabbit.amqp.exchange}")
+	//@Value("${spring.rabbit.amqp.exchange}")
 	private String onlineRabbitMessageExchange;
 
-	@Value("${spring.rabbit.amqp.queue}")
+	//@Value("${spring.rabbit.amqp.queue}")
 	private String onlineRabbitMessageQueue;
 
 	@Bean
@@ -37,7 +37,8 @@ public class SpringBootRabbitMQApplication {
 
 	@Bean
 	public SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListener consumer,
-			@Value("${spring.rabbit.amqp.queue}") String queueName) {
+			//@Value("${spring.rabbit.amqp.queue}")
+													String queueName) {
 		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
 		container.setQueueNames(queueName);

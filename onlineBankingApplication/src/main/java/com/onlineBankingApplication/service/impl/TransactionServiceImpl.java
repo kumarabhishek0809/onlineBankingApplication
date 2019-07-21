@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.onlineBankingApplication.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +16,7 @@ import com.onlineBankingApplication.dao.PrimaryTransactionDao;
 import com.onlineBankingApplication.dao.RecipientDao;
 import com.onlineBankingApplication.dao.SavingAccountDao;
 import com.onlineBankingApplication.dao.SavingTransactionDao;
-import com.onlineBankingApplication.entity.PrimaryAccount;
-import com.onlineBankingApplication.entity.PrimaryTransaction;
-import com.onlineBankingApplication.entity.Recipient;
-import com.onlineBankingApplication.entity.SavingsAccount;
-import com.onlineBankingApplication.entity.SavingsTransaction;
-import com.onlineBankingApplication.entity.User;
+import com.onlineBankingApplication.entity.UserDetails;
 import com.onlineBankingApplication.service.TransactionService;
 import com.onlineBankingApplication.service.UserService;
 import com.onlineBankingApplication.service.storedprocedure.sp.DataAccessRepository;
@@ -53,16 +49,16 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public List<PrimaryTransaction> findPrimaryTransactionList(String username) {
-		User user = userService.findByUserName(username);
-		Long accountNumber = user.getPrimaryAccount().getId();
+		UserDetails userDetails = userService.findByUserName(username);
+		Long accountNumber = userDetails.getPrimaryAccount().getId();
 		List<Result> storedProcCall = dataAccessRepository.storedProcCall(accountNumber);
-		return user.getPrimaryAccount().getPrimaryTransactions();
+		return userDetails.getPrimaryAccount().getPrimaryTransactions();
 	}
 
 	@Override
 	public List<SavingsTransaction> findSavingsTransactionList(String username) {
-		User user = userService.findByUserName(username);
-		return user.getSavingsAccount().getSavingTransactions();
+		UserDetails userDetails = userService.findByUserName(username);
+		return userDetails.getSavingsAccount().getSavingTransactions();
 	}
 
 	@Override
@@ -88,7 +84,7 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public void betweenAccountsTransafer(String transferFrom, String transferTo, String amount,
 			PrimaryAccount primaryAccount, SavingsAccount savingAccount, Principal principal) {
-		User user = userService.findByUserName(principal.getName());
+		UserDetails userDetails = userService.findByUserName(principal.getName());
 		if (PRIMARY.equalsIgnoreCase(transferFrom) && SAVINGS.equalsIgnoreCase(transferTo)) {
 			primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
 			savingAccount.setAccountBalance(savingAccount.getAccountBalance().add(new BigDecimal(amount)));
@@ -119,7 +115,7 @@ public class TransactionServiceImpl implements TransactionService {
 	public List<Recipient> findRecipientList(Principal principal) {
 		String username = principal.getName();
 		List<Recipient> recipients = StreamSupport.stream(recipientDao.findAll().spliterator(), true)
-				.filter(recipient -> username.equalsIgnoreCase(recipient.getUser().getUsername()))
+				.filter(recipient -> username.equalsIgnoreCase(recipient.getUserDetails().getUsername()))
 				.collect(Collectors.toList());
 		return recipients;
 	}

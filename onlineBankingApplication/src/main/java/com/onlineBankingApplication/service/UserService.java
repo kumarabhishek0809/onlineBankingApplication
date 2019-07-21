@@ -3,14 +3,14 @@ package com.onlineBankingApplication.service;
 import java.util.List;
 import java.util.Set;
 
-import com.onlineBankingApplication.entity.User;
+import com.onlineBankingApplication.entity.UserDetails;
 import com.onlineBankingApplication.entity.UserRole;
 
 public interface UserService {
 
-	User findByUserName(String username);
+	UserDetails findByUserName(String username);
 
-	User findByEmail(String email);
+	UserDetails findByEmail(String email);
 
 	boolean checkUserExists(String username, String email);
 
@@ -18,11 +18,11 @@ public interface UserService {
 
 	boolean checkEmailExists(String email);
 
-	void save(User user);
+	void save(UserDetails userDetails);
 
-	User createUser(User user, Set<UserRole> userRoles);
+	UserDetails createUser(UserDetails userDetails, Set<UserRole> userRoles);
 
-	List<User> findUserList();
+	List<UserDetails> findUserList();
 
 	void enableUser(String username);
 
