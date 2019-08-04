@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loggedIn: Boolean = false;
   username: String;
   password: String;
+
   constructor(private _loginService: LoginService) {
     if (localStorage.getItem('PortalAdminHasLoggedIn') === ''
       || localStorage.getItem('PortalAdminHasLoggedIn') == null) {
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
       this.loggedIn = false;
     } else {
       console.log('Else Block Loged True' + localStorage);
-      this.loggedIn = true;
+      //this.loggedIn = true;
     }
   }
 

@@ -1,5 +1,4 @@
 package com.onlineBankingApplication.entity;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;

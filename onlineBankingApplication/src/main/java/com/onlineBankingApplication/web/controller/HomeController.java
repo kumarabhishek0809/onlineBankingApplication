@@ -43,12 +43,12 @@ public class HomeController {
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
 	public String signUp(Model model) {
 		UserDetails userDetails = new UserDetails();
-		model.addAttribute("user", userDetails);
+		model.addAttribute("userDetails", userDetails);
 		return "signUp";
 	}
 
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
-	public String signUpPost(@ModelAttribute("user") UserDetails userDetails, Model model) {
+	public String signUpPost(@ModelAttribute("userDetails") UserDetails userDetails, Model model) {
 		if (userService.checkUserExists(userDetails.getUsername(), userDetails.getEmail())) {
 			if (userService.checkEmailExists(userDetails.getEmail())) {
 				model.addAttribute("emailExists", true);

@@ -24,7 +24,6 @@ public class Appointment {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	// Join column is the Column in Appointment table which is Foreign Key and primary key in UserDetailsData.
 	private UserDetails userDetails;
 
 	public Long getId() {

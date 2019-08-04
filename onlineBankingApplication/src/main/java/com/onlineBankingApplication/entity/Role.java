@@ -14,10 +14,11 @@ public class Role {
 
 	
 	/*
-	 * 
-	 * 
-	 * INSERT INTO `onlinebanking`.`role` (`role_id`, `name`) VALUES ('0', 'ROLE_USER');
-	 * INSERT INTO `onlinebanking`.`role` (`role_id`, `name`) VALUES ('1', 'ROLE_ADMIN');
+	 *
+	 *
+	 * INSERT INTO role (role_id, name) VALUES ('0', 'ROLE_USER');
+	 * INSERT INTO role (role_id, name) VALUES ('1', 'ROLE_ADMIN');
+	 * commit;
 	 */
 	@Id
 	private int roleId;
